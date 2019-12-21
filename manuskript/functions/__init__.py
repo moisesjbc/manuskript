@@ -442,5 +442,20 @@ def inspect():
             s.function))
         print("   " + "".join(s.code_context))
 
+
+def search(search_regex, text):
+    """
+    Search all occurrences of a regex in a text.
+
+    :param search_regex:    a regex object with the search to perform
+    :param text:            text to search on
+    :return:                list of tuples (start_pos, end_pos)
+    """
+    if text is not None:
+        return [(m.start(), m.end()) for m in search_regex.finditer(text)]
+    else:
+        return []
+
+
 # Spellchecker loads writablePath from this file, so we need to load it after they get defined
 from manuskript.functions.spellchecker import Spellchecker
