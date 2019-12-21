@@ -3,6 +3,7 @@
 
 """Tests for functions"""
 
+import re
 from manuskript import functions as F
 
 def test_wordCount():
@@ -94,3 +95,28 @@ def test_mainWindow():
     F.printObjects()
     assert len(F.findWidgetsOfClass(QWidget)) > 0
     assert len(F.findWidgetsOfClass(QLCDNumber)) == 0
+
+
+def test_search_no_match():
+    assert F.search(re.compile("text"), "foo") == []
+
+
+def test_search_simple_str_match():
+    assert F.search(re.compile("text"), "This is some text") == [(13, 17)]
+
+
+def test_search_multiple_str_matches():
+    assert F.search(re.compile("text"), "text, text and more text") == [
+        (0, 4),
+        (6, 10),
+        (20, 24)
+    ]
+
+def test_search_multiple_str_matches_case_sensitive():
+    assert F.search(re.compile("text"), "TeXt, TEXT and more text") == [(20, 24)]
+
+    assert F.search(re.compile("text", re.IGNORECASE), "TeXt, TEXT and more text") == [
+        (0, 4),
+        (6, 10),
+        (20, 24)
+    ]

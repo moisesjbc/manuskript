@@ -2,13 +2,17 @@
 # --!-- coding: utf8 --!--
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QPalette, QFontMetrics
-from PyQt5.QtWidgets import QWidget, QMenu, QAction, qApp, QListWidgetItem, QStyledItemDelegate, QStyle
+from PyQt5.QtWidgets import QWidget, qApp, QListWidgetItem, QStyledItemDelegate, QStyle
 
-from manuskript.enums import Outline
+
 from manuskript.functions import mainWindow
 from manuskript.ui import style
 from manuskript.ui.search_ui import Ui_search
-from manuskript.models import references as Ref
+
+from manuskript.models.flatDataModelWrapper import flatDataModelWrapper
+from manuskript.models.searchableItem import searchResult
+from manuskript.ui.searchMenu import searchMenu
+from manuskript.ui.highlighters.searchResultHighlighters.searchResultHighlighter import searchResultHighlighter
 
 
 class search(QWidget, Ui_search):
@@ -16,116 +20,79 @@ class search(QWidget, Ui_search):
         QWidget.__init__(self, parent)
         self.setupUi(self)
 
-        self.options = {
-            "All": True,
-            "Title": True,
-            "Text": True,
-            "Summary": False,
-            "Notes": False,
-            "POV": False,
-            "Status": False,
-            "Label": False,
-            "CS": True
-        }
+        self.searchTextInput.returnPressed.connect(self.search)
 
-        self.text.returnPressed.connect(self.search)
-        self.generateOptionMenu()
+        self.searchMenu = searchMenu()
+        self.btnOptions.setMenu(self.searchMenu)
 
         self.delegate = listResultDelegate(self)
         self.result.setItemDelegate(self.delegate)
         self.result.itemClicked.connect(self.openItem)
 
         self.result.setStyleSheet(style.searchResultSS())
-        self.text.setStyleSheet(style.lineEditSS())
+        self.searchTextInput.setStyleSheet(style.lineEditSS())
 
-    def generateOptionMenu(self):
-        self.menu = QMenu(self)
-        a = QAction(self.tr("Search in:"), self.menu)
-        a.setEnabled(False)
-        self.menu.addAction(a)
-        for i, d in [
-            (self.tr("All"), "All"),
-            (self.tr("Title"), "Title"),
-            (self.tr("Text"), "Text"),
-            (self.tr("Summary"), "Summary"),
-            (self.tr("Notes"), "Notes"),
-            (self.tr("POV"), "POV"),
-            (self.tr("Status"), "Status"),
-            (self.tr("Label"), "Label"),
-        ]:
-            a = QAction(i, self.menu)
-            a.setCheckable(True)
-            a.setChecked(self.options[d])
-            a.setData(d)
-            a.triggered.connect(self.updateOptions)
-            self.menu.addAction(a)
-        self.menu.addSeparator()
+        self.searchResultHighlighter = searchResultHighlighter()
 
-        a = QAction(self.tr("Options:"), self.menu)
-        a.setEnabled(False)
-        self.menu.addAction(a)
-        for i, d in [
-            (self.tr("Case sensitive"), "CS"),
-        ]:
-            a = QAction(i, self.menu)
-            a.setCheckable(True)
-            a.setChecked(self.options[d])
-            a.setData(d)
-            a.triggered.connect(self.updateOptions)
-            self.menu.addAction(a)
-        self.menu.addSeparator()
+    def prepare_regex(self, search_text):
+        import re
 
-        self.btnOptions.setMenu(self.menu)
+        flags = re.UNICODE
 
-    def updateOptions(self):
-        a = self.sender()
-        self.options[a.data()] = a.isChecked()
+        if self.searchMenu.case_sensitive() is not True:
+            flags |= re.IGNORECASE
+
+        # TODO: Apply re.escape conditionally once REGEX searches are implemented.
+        search_text = re.escape(search_text)
+
+        if self.searchMenu.match_words() is True:
+            # Source: https://stackoverflow.com/a/15863102
+            search_text = r'\b%s\b' % search_text
+
+        return re.compile(search_text, flags)
 
     def search(self):
-        text = self.text.text()
-
-        # Choosing the right columns
-        lstColumns = [
-            ("Title", Outline.title),
-            ("Text", Outline.text),
-            ("Summary", Outline.summarySentence),
-            ("Summary", Outline.summaryFull),
-            ("Notes", Outline.notes),
-            ("POV", Outline.POV),
-            ("Status", Outline.status),
-            ("Label", Outline.label),
-        ]
-        columns = [c[1] for c in lstColumns if self.options[c[0]] or self.options["All"]]
-
-        # Setting override cursor
-        qApp.setOverrideCursor(Qt.WaitCursor)
-
-        # Searching
-        model = mainWindow().mdlOutline
-        results = model.findItemsContaining(text, columns, self.options["CS"])
-
-        # Showing results
         self.result.clear()
-        for r in results:
-            index = model.getIndexByID(r)
-            if not index.isValid():
-                continue
-            item = index.internalPointer()
-            i = QListWidgetItem(item.title(), self.result)
-            i.setData(Qt.UserRole, r)
-            i.setData(Qt.UserRole + 1, item.path())
-            self.result.addItem(i)
 
-        # Removing override cursor
-        qApp.restoreOverrideCursor()
+        search_text = self.searchTextInput.text()
+        if len(search_text) > 0:
+            search_regex = self.prepare_regex(search_text)
+            results = []
+
+            # Set override cursor
+            qApp.setOverrideCursor(Qt.WaitCursor)
+
+            for model, model_prefix in [
+                (mainWindow().mdlOutline, "Outline"),
+                (mainWindow().mdlCharacter, "Character"),
+                (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData")
+            ]:
+                filtered_columns = self.searchMenu.columns(model_prefix)
+
+                # Searching
+                results += model.search_occurrences(search_regex, filtered_columns)
+
+            print('results', results)
+
+            # Showing results
+            self.generate_results_lists(results)
+
+            # Remove override cursor
+            qApp.restoreOverrideCursor()
+
+    def generate_results_lists(self, results):
+        for result in results:
+            # TODO: Results should be always a searchResult. Change method for outline.
+            if isinstance(result, str):
+                result = searchResult("Outline", str(result), None, 0)
+
+            item = QListWidgetItem(result.title(), self.result)
+            item.setData(Qt.UserRole, result)
+            item.setData(Qt.UserRole + 1, result.path())
+            self.result.addItem(item)
 
     def openItem(self, item):
-        r = Ref.textReference(item.data(Qt.UserRole))
-        Ref.open(r)
-        # mw = mainWindow()
-        # index = mw.mdlOutline.getIndexByID(item.data(Qt.UserRole))
-        # mw.mainEditor.setCurrentModelIndex(index, newTab=True)
-
+        self.searchResultHighlighter.highlight_search_result(item.data(Qt.UserRole))
 
 class listResultDelegate(QStyledItemDelegate):
     def __init__(self, parent=None):

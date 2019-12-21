@@ -3,11 +3,14 @@
 from PyQt5.QtCore import QModelIndex, Qt, QAbstractItemModel, QVariant
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 
-from manuskript.functions import randomColor, iconColor, mainWindow
+from manuskript.functions import randomColor, iconColor, mainWindow, search
 from manuskript.enums import Character as C
 
+from manuskript.models.searchableModel import searchableModel
+from manuskript.models.searchableItem import searchableItem
 
-class characterModel(QAbstractItemModel):
+
+class characterModel(QAbstractItemModel, searchableModel):
 
     def __init__(self, parent):
         QAbstractItemModel.__init__(self, parent)
@@ -217,11 +220,15 @@ class characterModel(QAbstractItemModel):
             c.infos.pop(r)
             self.endRemoveRows()
 
+    def searchable_items(self):
+        for character in self.characters:
+            yield character
+
 ###############################################################################
 # CHARACTER
 ###############################################################################
 
-class Character():
+class Character(searchableItem):
     def __init__(self, model, name="No name"):
         self._model = model
         self.lastPath = ""
@@ -245,6 +252,12 @@ class Character():
 
     def index(self, column=0):
         return self._model.indexFromItem(self, column)
+
+    def data(self, column):
+        if column == "Info":
+            return self.infos
+        else:
+            return self._data.get(column, None)
 
     def assignRandomColor(self):
         """
@@ -291,6 +304,30 @@ class Character():
         for i in self.infos:
             r.append((i.description, i.value))
         return r
+
+    def searchTitle(self):
+        return self.name()
+
+    def search_data(self, column):
+        if column == C.infos:
+            return self.infos
+        else:
+            return self.data(column)
+
+    def search_occurrences(self, search_regex, columns):
+        results = []
+
+        for column in columns:
+            data = self.search_data(column)
+            if isinstance(data, list):
+                for i in range(0, len(data)):
+                    if len(search(search_regex, data[i].description)) or len(search(search_regex, data[i].value)):
+                        results.append(self.wrap_search_occurrence(column, i, i))
+            else:
+                results += super().search_occurrences(search_regex, [column])
+
+        return results
+
 
 class CharacterInfo():
     def __init__(self, character, description="", value=""):
