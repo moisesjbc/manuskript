@@ -73,3 +73,8 @@ class FlatData(IntEnum):
     summaryPara = 2,
     summaryPage = 3,
     summaryFull = 4
+
+
+class SearchOption(IntEnum):
+    caseSensitive = 0,
+    matchWords = 1

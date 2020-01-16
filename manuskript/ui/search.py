@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # --!-- coding: utf8 --!--
+import re
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QPalette, QFontMetrics
 from PyQt5.QtWidgets import QWidget, qApp, QListWidgetItem, QStyledItemDelegate, QStyle
@@ -13,6 +14,8 @@ from manuskript.models.flatDataModelWrapper import flatDataModelWrapper
 from manuskript.models.searchableItem import searchResult
 from manuskript.ui.searchMenu import searchMenu
 from manuskript.ui.highlighters.searchResultHighlighters.searchResultHighlighter import searchResultHighlighter
+
+from manuskript.enums import SearchOption
 
 
 class search(QWidget, Ui_search):
@@ -35,17 +38,17 @@ class search(QWidget, Ui_search):
         self.searchResultHighlighter = searchResultHighlighter()
 
     def prepare_regex(self, search_text):
-        import re
+        search_options = self.searchMenu.options()
 
         flags = re.UNICODE
 
-        if self.searchMenu.case_sensitive() is not True:
+        if SearchOption.caseSensitive not in search_options:
             flags |= re.IGNORECASE
 
         # TODO: Apply re.escape conditionally once REGEX searches are implemented.
         search_text = re.escape(search_text)
 
-        if self.searchMenu.match_words() is True:
+        if SearchOption.matchWords in search_options:
             # Source: https://stackoverflow.com/a/15863102
             search_text = r'\b%s\b' % search_text
 
