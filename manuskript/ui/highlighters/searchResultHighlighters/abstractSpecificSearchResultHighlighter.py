@@ -3,9 +3,10 @@
 
 
 from manuskript.ui.highlighters.searchResultHighlighters.widgetSelectionHighlighter import widgetSelectionHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.abstractSearchResultHighlighter import abstractSearchResultHighlighter
 
 
-class abstractSearchResultHighlighter():
+class abstractSpecificSearchResultHighlighter(abstractSearchResultHighlighter):
     def __init__(self):
         self._widgetSelectionHighlighter = widgetSelectionHighlighter()
         pass

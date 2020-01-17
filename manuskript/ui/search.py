@@ -68,7 +68,8 @@ class search(QWidget, Ui_search):
             for model, model_prefix in [
                 (mainWindow().mdlOutline, "Outline"),
                 (mainWindow().mdlCharacter, "Character"),
-                (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData")
+                (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData"),
+                (mainWindow().mdlWorld, "World")
             ]:
                 filtered_columns = self.searchMenu.columns(model_prefix)
 

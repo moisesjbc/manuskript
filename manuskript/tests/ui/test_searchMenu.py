@@ -3,7 +3,7 @@
 
 import pytest
 from manuskript.ui.searchMenu import searchMenu
-from manuskript.enums import Outline, Character, FlatData, SearchOption
+from manuskript.enums import Outline, Character, FlatData, World, SearchOption
 
 
 def trigger_filter(filter_key, actions):
@@ -19,9 +19,10 @@ def test_search_menu_actions(search_menu):
     assert [action.text() for action in search_menu.actions()] == [
         search_menu.tr("Search in:"),
         '',
-        search_menu.tr("Outline"),
         search_menu.tr("Character"),
         search_menu.tr("FlatData"),
+        search_menu.tr("Outline"),
+        search_menu.tr("World"),
         '',
         search_menu.tr("Options"),
         '',
@@ -51,6 +52,9 @@ def test_search_menu_default_columns(search_menu):
         FlatData.summaryPage, FlatData.summaryFull
     }
 
+    assert set(search_menu.columns("World")) == {
+        World.name, World.description, World.passion, World.conflict
+    }
 
 def test_search_menu_default_options(search_menu):
     assert search_menu.options() == [SearchOption.caseSensitive]

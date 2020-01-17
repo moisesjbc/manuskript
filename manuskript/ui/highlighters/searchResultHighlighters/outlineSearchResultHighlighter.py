@@ -3,14 +3,14 @@
 
 from manuskript.models import references as Ref
 from manuskript.enums import Outline
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSpecificSearchResultHighlighter
 from manuskript.functions import mainWindow
 from PyQt5.QtWidgets import QTextEdit, QLineEdit, QLabel, QWidget, QGroupBox
 from manuskript.ui.views.metadataView import metadataView
 from manuskript.ui.collapsibleGroupBox2 import collapsibleGroupBox2
 
 
-class outlineSearchResultHighlighter(abstractSearchResultHighlighter):
+class outlineSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def __init__(self):
         super().__init__()
         self.outline_index = None

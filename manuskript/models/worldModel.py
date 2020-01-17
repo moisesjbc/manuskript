@@ -10,9 +10,12 @@ from PyQt5.QtWidgets import QMenu, QAction, qApp
 from manuskript.enums import World
 from manuskript.functions import mainWindow
 from manuskript.ui import style as S
+from manuskript.models.searchableModel import searchableModel
+from manuskript.models.searchResult import searchResult
+from manuskript.functions import search
 
 
-class worldModel(QStandardItemModel):
+class worldModel(QStandardItemModel, searchableModel):
     def __init__(self, parent):
         QStandardItemModel.__init__(self, 0, len(World), parent)
         self.mw = mainWindow()
@@ -353,3 +356,52 @@ class worldModel(QStandardItemModel):
                 return QSize(0, h + 6)
 
         return QStandardItemModel.data(self, index, role)
+
+    #######################################################################
+    # Search
+    #######################################################################
+    def search_occurrences(self, search_regex, columns):
+        """
+        Search for occurrences of a regex in the given columns for all World items.
+
+        :param search_regex:    search regex
+        :param columns:         World columns for searching in
+        :return:                list of searchResult instances
+        """
+        results = []
+
+        def _search_occurrences(item):
+            name = item.text()
+            ID = self.itemID(item)
+            path = self.path(item)
+
+            for column in columns:
+                for (startPos, endPos) in search(search_regex, self.search_data(item, column)):
+                    results.append(searchResult("World", ID, column, name, path, (startPos, endPos)))
+
+            for child in self.children(item):
+                _search_occurrences(child)
+
+        _search_occurrences(self.invisibleRootItem())
+        return results
+
+    def search_data(self, item, column):
+        """
+        Return data so search on from the given item and column
+
+        :param item:    World list item
+        :param column:  World column
+        :return:        Data for item <item> in column <column>
+        """
+        index = self.indexFromItem(item)
+
+        if column == World.name:
+            return self.name(index)
+        if column == World.description:
+            return self.description(index)
+        elif column == World.conflict:
+            return self.conflict(index)
+        elif column == World.passion:
+            return self.passion(index)
+        else:
+            raise NotImplementedError

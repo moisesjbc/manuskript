@@ -6,20 +6,20 @@ from manuskript.models import references as Ref
 from manuskript.functions import mainWindow
 from manuskript.enums import Character
 from PyQt5.QtWidgets import QTextEdit, QTableView
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.tabsSearchResultHighlighter import tabsSearchResultHighlighter
 
 
-class characterSearchResultHighlighter(abstractSearchResultHighlighter):
+class characterSearchResultHighlighter(tabsSearchResultHighlighter):
     def __init__(self):
-        super().__init__()
+        super().__init__(mainWindow().tabPersos)
 
     def open_view(self, search_result):
         r = Ref.characterReference(search_result.id())
         Ref.open(r)
         mainWindow().tabPersos.setEnabled(True)
 
-    def retrieve_widget(self, search_result):
-        textEditMap = {
+    def widgetsMap(self):
+        return {
             Character.goal: (0, "txtPersoGoal", QTextEdit),
             Character.motivation: (0, "txtPersoMotivation", QTextEdit),
             Character.conflict: (0, "txtPersoConflict", QTextEdit),
@@ -30,8 +30,3 @@ class characterSearchResultHighlighter(abstractSearchResultHighlighter):
             Character.notes: (2, "txtPersoNotes", QTextEdit),
             Character.infos: (3, "tblPersoInfos", QTableView)
         }
-
-        character_tab_index, character_widget_name, character_widget_class = textEditMap[search_result.column()]
-
-        mainWindow().tabPersos.setCurrentIndex(character_tab_index)
-        return mainWindow().tabPersos.findChild(character_widget_class, character_widget_name)

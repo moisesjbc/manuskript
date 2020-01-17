@@ -4,10 +4,10 @@
 from manuskript.functions import mainWindow
 from manuskript.enums import  FlatData
 from PyQt5.QtWidgets import QTextEdit, QLineEdit
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSpecificSearchResultHighlighter
 
 
-class flatDataSearchResultHighlighter(abstractSearchResultHighlighter):
+class flatDataSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def __init__(self):
         super().__init__()
 
