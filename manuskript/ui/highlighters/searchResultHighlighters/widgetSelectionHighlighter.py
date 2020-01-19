@@ -2,7 +2,8 @@
 # --!-- coding: utf8 --!--
 
 from PyQt5.QtGui import QTextCursor
-from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QLabel
+from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QLabel, QListView
+from PyQt5.QtCore import QItemSelectionModel
 
 
 class widgetSelectionHighlighter():
@@ -19,6 +20,8 @@ class widgetSelectionHighlighter():
             self._highlight_line_edit_search_result(widget, start_pos, end_pos)
         elif isinstance(widget, QTableView):
             self._highlight_table_view_search_result(widget, start_pos)
+        elif isinstance(widget, QListView):
+            self._highlight_list_search_result(widget, start_pos)
         elif isinstance(widget, QLabel):
             self._highlight_label_search_result(widget)
         else:
@@ -67,6 +70,17 @@ class widgetSelectionHighlighter():
 
         # Highlight table row containing search result.
         table_view.selectRow(start_pos)
+
+    def _highlight_list_search_result(self, list_view, start_pos):
+        # On focus out, clear list selection
+        current_index = list_view.currentIndex()
+        self.generate_clear_handler(list_view, lambda widget: widget.setCurrentIndex(current_index))
+
+        # Highlight list row containing search result.
+        index = list_view.model().index(start_pos, 0, list_view.rootIndex())
+        if index.isValid():
+            list_view.setCurrentIndex(index)
+            list_view.selectionModel().select(index, QItemSelectionModel.Select)
 
     def _highlight_label_search_result(self, label):
         # On focus out, clear label selection.

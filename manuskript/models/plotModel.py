@@ -10,7 +10,8 @@ from PyQt5.QtWidgets import QAction, QMenu
 
 from manuskript.enums import Plot
 from manuskript.enums import PlotStep
-from manuskript.functions import toInt, mainWindow
+from manuskript.functions import toInt, mainWindow, search
+from manuskript.models.searchResult import searchResult
 
 
 class plotModel(QStandardItemModel):
@@ -262,3 +263,47 @@ class plotModel(QStandardItemModel):
 
         mpr.mapped.connect(self.addPlotPerso)
         self.mw.btnAddPlotPerso.setMenu(menu)
+
+    #######################################################################
+    # Search
+    #######################################################################
+    def search_occurrences(self, search_regex, columns):
+        """
+        Search for occurrences of a regex in the given columns for all Plot items.
+
+        :param search_regex:    search regex
+        :param columns:         World columns for searching in
+        :return:                list of searchResult instances
+        """
+        results = []
+
+        for i in range(self.rowCount()):
+            for column in columns:
+                data = self.search_data(i, column)
+                if isinstance(data, list):
+                    for character_index in range(0, len(data)):
+                        if len(search(search_regex, data[character_index])):
+                            # Duplicated code
+                            results.append(searchResult("Plot", self.item(i, Plot.ID).text(), column, self.item(i, Plot.name).text(), "", (character_index, character_index)))
+                else:
+                    for (startPos, endPos) in search(search_regex, self.search_data(i, column)):
+                        # TODO: Add path.
+                        # TODO: Duplicated code.
+                        results.append(searchResult("Plot", self.item(i, Plot.ID).text(), column, self.item(i, Plot.name).text(), "", (startPos, endPos)))
+
+        return results
+
+    def search_data(self, index, column):
+        if column == Plot.characters:
+            item = self.item(index, Plot.characters)
+
+            character_names = []
+            for i in range(item.rowCount()):
+                if mainWindow().mdlCharacter.getCharacterByID(item.child(i).text()):
+                    character_names.append(mainWindow().mdlCharacter.getCharacterByID(item.child(i).text()).name())
+
+            print('Plot', self.item(index, Plot.name).text())
+            print ("character_names", character_names)
+            return character_names
+        else:
+            return self.item(index, column).text()

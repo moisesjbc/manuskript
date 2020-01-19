@@ -6,6 +6,8 @@ from manuskript.ui.highlighters.searchResultHighlighters.characterSearchResultHi
 from manuskript.ui.highlighters.searchResultHighlighters.flatDataSearchResultHighlighter import flatDataSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.outlineSearchResultHighlighter import outlineSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.worldSearchResultHighlighter import worldSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.plotSearchResultHighlighter import plotSearchResultHighlighter
+
 
 class searchResultHighlighter(abstractSearchResultHighlighter):
     def __init__(self):
@@ -20,6 +22,8 @@ class searchResultHighlighter(abstractSearchResultHighlighter):
             highlighter = outlineSearchResultHighlighter()
         elif search_result.type() == "World":
             highlighter = worldSearchResultHighlighter()
+        elif search_result.type() == "Plot":
+            highlighter = plotSearchResultHighlighter()
         else:
             raise NotImplementedError
 

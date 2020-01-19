@@ -19,5 +19,6 @@ class tabsSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def retrieve_widget(self, search_result):
         tab_index, widget_name, widget_class = self.widgetsMap()[search_result.column()]
 
+        self._tabWidget.setEnabled(True)
         self._tabWidget.setCurrentIndex(tab_index)
         return self._tabWidget.findChild(widget_class, widget_name)

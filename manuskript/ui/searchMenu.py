@@ -2,7 +2,7 @@
 # --!-- coding: utf8 --!--
 from PyQt5.QtWidgets import QMenu, QAction
 
-from manuskript.enums import Outline, Character, FlatData, World, SearchOption
+from manuskript.enums import Outline, Character, FlatData, World, Plot, SearchOption
 from manuskript.ui.searchFiltersSubMenu import searchFiltersSubMenu
 
 
@@ -17,6 +17,7 @@ class searchMenu(QMenu):
         self._add_character_filters()
         self._add_flat_data_filters()
         self._add_outline_filters()
+        self._add_plot_filters()
         self._add_world_filters()
         self.addSeparator()
 
@@ -64,12 +65,21 @@ class searchMenu(QMenu):
             ("Summary full", FlatData.summaryFull)
         ])
 
+    def _add_plot_filters(self):
+        self._add_filters_submenu("Plot", [
+            ("Name", Plot.name),
+            ("Characters", Plot.characters),
+            ("Description", Plot.description),
+            ("Result", Plot.result),
+            ("Steps", Plot.steps)
+        ])
+
     def _add_world_filters(self):
         self._add_filters_submenu("World", [
             ("Name", World.name),
             ("Description", World.description),
             ("Passion", World.passion),
-            ("Conflict", World.conflict),
+            ("Conflict", World.conflict)
         ])
 
     def _add_options(self):

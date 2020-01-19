@@ -69,7 +69,8 @@ class search(QWidget, Ui_search):
                 (mainWindow().mdlOutline, "Outline"),
                 (mainWindow().mdlCharacter, "Character"),
                 (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData"),
-                (mainWindow().mdlWorld, "World")
+                (mainWindow().mdlWorld, "World"),
+                (mainWindow().mdlPlots, "Plot")
             ]:
                 filtered_columns = self.searchMenu.columns(model_prefix)
 
@@ -86,10 +87,6 @@ class search(QWidget, Ui_search):
 
     def generate_results_lists(self, results):
         for result in results:
-            # TODO: Results should be always a searchResult. Change method for outline.
-            if isinstance(result, str):
-                result = searchResult("Outline", str(result), None, 0)
-
             item = QListWidgetItem(result.title(), self.result)
             item.setData(Qt.UserRole, result)
             item.setData(Qt.UserRole + 1, result.path())

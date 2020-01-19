@@ -124,7 +124,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -815,8 +815,8 @@
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>204</width>
-                      <height>606</height>
+                      <width>450</width>
+                      <height>703</height>
                      </rect>
                     </property>
                     <layout class="QFormLayout" name="formLayout_8">
@@ -2095,7 +2095,7 @@
      <x>0</x>
      <y>0</y>
      <width>1112</width>
-     <height>30</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2821,7 +2821,8 @@
   </action>
   <action name="actSearch">
    <property name="icon">
-    <iconset theme="edit-find"/>
+    <iconset theme="edit-find">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Search</string>
