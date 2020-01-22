@@ -278,14 +278,14 @@ class plotModel(QStandardItemModel):
         results = []
 
         for i in range(self.rowCount()):
-            isPlotStepColumn = lambda column: column in [PlotStep.name, PlotStep.summary]
+            isPlotStepColumn = lambda column: column in [Plot.steps]
             plotColumns = filter(lambda column: not isPlotStepColumn(column), columns)
             plotStepColumns = list(filter(lambda column: isPlotStepColumn(column), columns))
 
             results += self.searchOccurrencesInPlot(search_regex, i, plotColumns)
 
             if len(plotStepColumns):
-                results += self.searchOccurrencesInPlotSteps(search_regex, i, plotStepColumns)
+                results += self.searchOccurrencesInPlotSteps(search_regex, i)
 
         return results
 
@@ -310,26 +310,24 @@ class plotModel(QStandardItemModel):
 
         return results
 
-    def searchOccurrencesInPlotSteps(self, search_regex, plotIndex, plotStepColumns):
+    def searchOccurrencesInPlotSteps(self, search_regex, plotIndex):
         results = []
         plotId = self.item(plotIndex, Plot.ID).text()
 
         subplots = self.getSubPlotsByID(plotId)
         for subplotIndex in range(len(subplots)):
             _, subplotName, subplotSummary = subplots[subplotIndex]
-            if PlotStep.name in plotStepColumns:
-                for (startPos, endPos) in search(search_regex, subplotName):
-                    # TODO: Add path.
-                    # TODO: Duplicated code.
-                    results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.name, subplotName, "",
-                                                (startPos, endPos)))
+            for (startPos, endPos) in search(search_regex, subplotName):
+                # TODO: Add path.
+                # TODO: Duplicated code.
+                results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.name, subplotName, "",
+                                            (startPos, endPos)))
 
-            if PlotStep.summary in plotStepColumns:
-                for (startPos, endPos) in search(search_regex, subplotSummary):
-                    # TODO: Add path.
-                    # TODO: Duplicated code.
-                    results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.summary, subplotName, "",
-                                                (startPos, endPos)))
+            for (startPos, endPos) in search(search_regex, subplotSummary):
+                # TODO: Add path.
+                # TODO: Duplicated code.
+                results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.summary, subplotName, "",
+                                            (startPos, endPos)))
 
         return results
 

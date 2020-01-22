@@ -71,7 +71,7 @@ class searchMenu(QMenu):
             ("Characters", [Plot.characters]),
             ("Description", [Plot.description]),
             ("Result", [Plot.result]),
-            ("Plot steps", [PlotStep.name, PlotStep.summary])
+            ("Steps", [Plot.steps])
         ])
 
     def _add_world_filters(self):

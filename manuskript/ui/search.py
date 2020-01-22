@@ -74,6 +74,9 @@ class search(QWidget, Ui_search):
             ]:
                 filtered_columns = self.searchMenu.columns(model_prefix)
 
+                if model_prefix == "Plot":
+                    print(filtered_columns)
+
                 # Searching
                 results += model.search_occurrences(search_regex, filtered_columns)
 
