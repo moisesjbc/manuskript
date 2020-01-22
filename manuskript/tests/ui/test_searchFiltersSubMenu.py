@@ -6,15 +6,16 @@ from manuskript.ui.searchFiltersSubMenu import searchFiltersSubMenu
 from manuskript.enums import Outline
 
 
-def trigger_filter(column, actions):
-    list(filter(lambda action: action.data() == column, actions))[0].trigger()
+def trigger_filter(columns, actions):
+    list(filter(lambda action: action.data() == columns, actions))[0].trigger()
 
 
 MENU_TITLE = "All"
 MENU_ELEMENTS = [
-    ("Title", Outline.title),
-    ("Text", Outline.text),
-    ("Notes", Outline.notes)
+    ("Title", [Outline.title]),
+    ("Text", [Outline.text]),
+    ("Notes", [Outline.notes]),
+    ("Summaries", [Outline.summarySentence, Outline.summaryFull])
 ]
 
 
@@ -37,7 +38,8 @@ def test_filters_submenu_menu_contains_given_items(filters_submenu_all_selected)
 
 
 def test_filters_submenu_columns_returns_all(filters_submenu_all_selected):
-    assert filters_submenu_all_selected.columns() == [Outline.title, Outline.text, Outline.notes]
+    assert filters_submenu_all_selected.columns() == [Outline.title, Outline.text, Outline.notes,
+                                                      Outline.summarySentence, Outline.summaryFull]
 
 
 def test_filters_submenu_all_action_is_checked(filters_submenu_all_selected):
@@ -46,12 +48,13 @@ def test_filters_submenu_all_action_is_checked(filters_submenu_all_selected):
 
 def test_filters_submenu_deselect_action(filters_submenu_all_selected):
     # Deselect one option. "All" option should be disabled.
-    trigger_filter(Outline.text, filters_submenu_all_selected.actions())
+    trigger_filter([Outline.text], filters_submenu_all_selected.actions())
     assert filters_submenu_all_selected.allAction().isChecked() is False
-    assert filters_submenu_all_selected.columns() == [Outline.title, Outline.notes]
+    assert filters_submenu_all_selected.columns() == [Outline.title, Outline.notes, Outline.summarySentence,
+                                                      Outline.summaryFull]
 
     # Select that option again. "All" option should be disabled.
-    trigger_filter(Outline.text, filters_submenu_all_selected.actions())
+    trigger_filter([Outline.text], filters_submenu_all_selected.actions())
     assert filters_submenu_all_selected.allAction().isChecked() is True
 
 

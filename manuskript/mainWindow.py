@@ -30,7 +30,8 @@ from manuskript.ui.helpLabel import helpLabel
 from manuskript.ui.mainWindow import Ui_MainWindow
 from manuskript.ui.tools.frequencyAnalyzer import frequencyAnalyzer
 from manuskript.ui.views.outlineDelegates import outlineCharacterDelegate
-from manuskript.ui.views.plotDelegate import plotDelegate
+from manuskript.ui.views.plotMetaDelegate import plotMetaDelegate
+from manuskript.ui.views.plotNameDelegate import plotNameDelegate
 from manuskript.ui.views.MDEditView import MDEditView
 from manuskript.ui.statusLabel import statusLabel
 
@@ -998,8 +999,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lstOutlinePlots.setShowSubPlot(True)
         self.plotCharacterDelegate = outlineCharacterDelegate(self.mdlCharacter, self)
         self.lstPlotPerso.setItemDelegate(self.plotCharacterDelegate)
-        self.plotDelegate = plotDelegate(self)
-        self.lstSubPlots.setItemDelegateForColumn(PlotStep.meta, self.plotDelegate)
+        self.plotMetaDelegate = plotMetaDelegate(self)
+        self.lstSubPlots.setItemDelegateForColumn(PlotStep.meta, self.plotMetaDelegate)
+        self.plotNameDelegate = plotNameDelegate(self)
+        self.lstSubPlots.setItemDelegateForColumn(PlotStep.name, self.plotNameDelegate)
 
         # World
         self.treeWorld.setModel(self.mdlWorld)

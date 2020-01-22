@@ -7,6 +7,7 @@ from manuskript.ui.highlighters.searchResultHighlighters.flatDataSearchResultHig
 from manuskript.ui.highlighters.searchResultHighlighters.outlineSearchResultHighlighter import outlineSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.worldSearchResultHighlighter import worldSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.plotSearchResultHighlighter import plotSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.plotStepSearchResultHighlighter import plotStepSearchResultHighlighter
 
 
 class searchResultHighlighter(abstractSearchResultHighlighter):
@@ -24,6 +25,8 @@ class searchResultHighlighter(abstractSearchResultHighlighter):
             highlighter = worldSearchResultHighlighter()
         elif search_result.type() == "Plot":
             highlighter = plotSearchResultHighlighter()
+        elif search_result.type() == "PlotStep":
+            highlighter = plotStepSearchResultHighlighter()
         else:
             raise NotImplementedError
 

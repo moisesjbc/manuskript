@@ -278,18 +278,58 @@ class plotModel(QStandardItemModel):
         results = []
 
         for i in range(self.rowCount()):
-            for column in columns:
-                data = self.search_data(i, column)
-                if isinstance(data, list):
-                    for character_index in range(0, len(data)):
-                        if len(search(search_regex, data[character_index])):
-                            # Duplicated code
-                            results.append(searchResult("Plot", self.item(i, Plot.ID).text(), column, self.item(i, Plot.name).text(), "", (character_index, character_index)))
-                else:
-                    for (startPos, endPos) in search(search_regex, self.search_data(i, column)):
-                        # TODO: Add path.
-                        # TODO: Duplicated code.
-                        results.append(searchResult("Plot", self.item(i, Plot.ID).text(), column, self.item(i, Plot.name).text(), "", (startPos, endPos)))
+            isPlotStepColumn = lambda column: column in [PlotStep.name, PlotStep.summary]
+            plotColumns = filter(lambda column: not isPlotStepColumn(column), columns)
+            plotStepColumns = list(filter(lambda column: isPlotStepColumn(column), columns))
+
+            results += self.searchOccurrencesInPlot(search_regex, i, plotColumns)
+
+            if len(plotStepColumns):
+                results += self.searchOccurrencesInPlotSteps(search_regex, i, plotStepColumns)
+
+        return results
+
+    def searchOccurrencesInPlot(self, search_regex, plotIndex, plotColumns):
+        results = []
+        plotId = self.item(plotIndex, Plot.ID).text()
+
+        for column in plotColumns:
+            data = self.search_data(plotIndex, column)
+            if isinstance(data, list):
+                for character_index in range(0, len(data)):
+                    if len(search(search_regex, data[character_index])):
+                        # TODO: Duplicated code
+                        results.append(searchResult("Plot", plotId, column, self.item(plotIndex, Plot.name).text(), "",
+                                                    (character_index, character_index)))
+            else:
+                for (startPos, endPos) in search(search_regex, self.search_data(plotIndex, column)):
+                    # TODO: Add path.
+                    # TODO: Duplicated code.
+                    results.append(
+                        searchResult("Plot", plotId, column, self.item(plotIndex, Plot.name).text(), "", (startPos, endPos)))
+
+        return results
+
+    def searchOccurrencesInPlotSteps(self, search_regex, plotIndex, plotStepColumns):
+        results = []
+        plotId = self.item(plotIndex, Plot.ID).text()
+
+        subplots = self.getSubPlotsByID(plotId)
+        for subplotIndex in range(len(subplots)):
+            _, subplotName, subplotSummary = subplots[subplotIndex]
+            if PlotStep.name in plotStepColumns:
+                for (startPos, endPos) in search(search_regex, subplotName):
+                    # TODO: Add path.
+                    # TODO: Duplicated code.
+                    results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.name, subplotName, "",
+                                                (startPos, endPos)))
+
+            if PlotStep.summary in plotStepColumns:
+                for (startPos, endPos) in search(search_regex, subplotSummary):
+                    # TODO: Add path.
+                    # TODO: Duplicated code.
+                    results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.summary, subplotName, "",
+                                                (startPos, endPos)))
 
         return results
 

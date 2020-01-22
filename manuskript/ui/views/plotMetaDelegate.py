@@ -8,7 +8,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QStyledItemDelegate, QLineEdit, QMenu, QAction
 
 
-class plotDelegate(QStyledItemDelegate):
+class plotMetaDelegate(QStyledItemDelegate):
     def __init__(self, parent=None):
         QStyledItemDelegate.__init__(self, parent)
 

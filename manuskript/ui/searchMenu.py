@@ -2,7 +2,7 @@
 # --!-- coding: utf8 --!--
 from PyQt5.QtWidgets import QMenu, QAction
 
-from manuskript.enums import Outline, Character, FlatData, World, Plot, SearchOption
+from manuskript.enums import Outline, Character, FlatData, World, Plot, SearchOption, PlotStep
 from manuskript.ui.searchFiltersSubMenu import searchFiltersSubMenu
 
 
@@ -33,53 +33,53 @@ class searchMenu(QMenu):
 
     def _add_outline_filters(self):
         self._add_filters_submenu("Outline", [
-            ("Title", Outline.title),
-            ("Text", Outline.text),
-            ("Summary (sentence)", Outline.summarySentence),
-            ("Summary (full)", Outline.summaryFull),
-            ("Notes", Outline.notes),
-            ("POV", Outline.POV),
-            ("Status", Outline.status),
-            ("Label", Outline.label)
+            ("Title", [Outline.title]),
+            ("Text", [Outline.text]),
+            ("Summary (sentence)", [Outline.summarySentence]),
+            ("Summary (full)", [Outline.summaryFull]),
+            ("Notes", [Outline.notes]),
+            ("POV", [Outline.POV]),
+            ("Status", [Outline.status]),
+            ("Label", [Outline.label])
         ])
 
     def _add_character_filters(self):
         self._add_filters_submenu("Character", [
-            ("Motivation", Character.motivation),
-            ("Goal", Character.goal),
-            ("Conflict", Character.conflict),
-            ("Epiphany", Character.epiphany),
-            ("Summary sentence", Character.summarySentence),
-            ("Summary paragraph", Character.summaryPara),
-            ("Summary full", Character.summaryFull),
-            ("Detailed info", Character.infos),
-            ("Notes", Character.notes),
+            ("Motivation", [Character.motivation]),
+            ("Goal", [Character.goal]),
+            ("Conflict", [Character.conflict]),
+            ("Epiphany", [Character.epiphany]),
+            ("Summary sentence", [Character.summarySentence]),
+            ("Summary paragraph", [Character.summaryPara]),
+            ("Summary full", [Character.summaryFull]),
+            ("Detailed info", [Character.infos]),
+            ("Notes", [Character.notes]),
         ])
 
     def _add_flat_data_filters(self):
         self._add_filters_submenu("FlatData", [
-            ("Summary situation", FlatData.summarySituation),
-            ("Summary sentence", FlatData.summarySentence),
-            ("Summary paragraph", FlatData.summaryPara),
-            ("Summary page", FlatData.summaryPage),
-            ("Summary full", FlatData.summaryFull)
+            ("Summary situation", [FlatData.summarySituation]),
+            ("Summary sentence", [FlatData.summarySentence]),
+            ("Summary paragraph", [FlatData.summaryPara]),
+            ("Summary page", [FlatData.summaryPage]),
+            ("Summary full", [FlatData.summaryFull])
         ])
 
     def _add_plot_filters(self):
         self._add_filters_submenu("Plot", [
-            ("Name", Plot.name),
-            ("Characters", Plot.characters),
-            ("Description", Plot.description),
-            ("Result", Plot.result),
-            ("Steps", Plot.steps)
+            ("Name", [Plot.name]),
+            ("Characters", [Plot.characters]),
+            ("Description", [Plot.description]),
+            ("Result", [Plot.result]),
+            ("Plot steps", [PlotStep.name, PlotStep.summary])
         ])
 
     def _add_world_filters(self):
         self._add_filters_submenu("World", [
-            ("Name", World.name),
-            ("Description", World.description),
-            ("Passion", World.passion),
-            ("Conflict", World.conflict)
+            ("Name", [World.name]),
+            ("Description", [World.description]),
+            ("Passion", [World.passion]),
+            ("Conflict", [World.conflict])
         ])
 
     def _add_options(self):

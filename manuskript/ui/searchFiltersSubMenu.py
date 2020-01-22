@@ -28,12 +28,14 @@ class searchFiltersSubMenu(QMenu):
         return self.actions()[2:]
 
     def _add_options(self, items, all_selected):
-        for (title, column) in items:
+        for (title, columns) in items:
+            if not isinstance(columns, list):
+                columns = [columns]
             action = QAction(self.tr(title), self)
 
             action.setCheckable(True)
             action.setChecked(all_selected)
-            action.setData(column)
+            action.setData(columns)
             action.triggered.connect(self._on_filter_triggered)
 
             self.addAction(action)
@@ -55,5 +57,5 @@ class searchFiltersSubMenu(QMenu):
         columns = []
         for action in self.actions()[2:]:
             if action.isChecked():
-                columns.append(action.data())
+                columns += action.data()
         return columns
