@@ -267,11 +267,11 @@ class plotModel(QStandardItemModel):
     #######################################################################
     # Search
     #######################################################################
-    def search_occurrences(self, search_regex, columns):
+    def searchOccurrences(self, searchRegex, columns):
         """
         Search for occurrences of a regex in the given columns for all Plot items.
 
-        :param search_regex:    search regex
+        :param searchRegex:    search regex
         :param columns:         World columns for searching in
         :return:                list of searchResult instances
         """
@@ -282,27 +282,27 @@ class plotModel(QStandardItemModel):
             plotColumns = filter(lambda column: not isPlotStepColumn(column), columns)
             plotStepColumns = list(filter(lambda column: isPlotStepColumn(column), columns))
 
-            results += self.searchOccurrencesInPlot(search_regex, i, plotColumns)
+            results += self.searchOccurrencesInPlot(searchRegex, i, plotColumns)
 
             if len(plotStepColumns):
-                results += self.searchOccurrencesInPlotSteps(search_regex, i)
+                results += self.searchOccurrencesInPlotSteps(searchRegex, i)
 
         return results
 
-    def searchOccurrencesInPlot(self, search_regex, plotIndex, plotColumns):
+    def searchOccurrencesInPlot(self, searchRegex, plotIndex, plotColumns):
         results = []
         plotId = self.item(plotIndex, Plot.ID).text()
 
         for column in plotColumns:
-            data = self.search_data(plotIndex, column)
+            data = self.searchData(plotIndex, column)
             if isinstance(data, list):
-                for character_index in range(0, len(data)):
-                    if len(search(search_regex, data[character_index])):
+                for characterIndex in range(0, len(data)):
+                    if len(search(searchRegex, data[characterIndex])):
                         # TODO: Duplicated code
                         results.append(searchResult("Plot", plotId, column, self.item(plotIndex, Plot.name).text(), "",
-                                                    (character_index, character_index)))
+                                                    (characterIndex, characterIndex)))
             else:
-                for (startPos, endPos) in search(search_regex, self.search_data(plotIndex, column)):
+                for (startPos, endPos) in search(searchRegex, self.searchData(plotIndex, column)):
                     # TODO: Add path.
                     # TODO: Duplicated code.
                     results.append(
@@ -310,20 +310,20 @@ class plotModel(QStandardItemModel):
 
         return results
 
-    def searchOccurrencesInPlotSteps(self, search_regex, plotIndex):
+    def searchOccurrencesInPlotSteps(self, searchRegex, plotIndex):
         results = []
         plotId = self.item(plotIndex, Plot.ID).text()
 
         subplots = self.getSubPlotsByID(plotId)
         for subplotIndex in range(len(subplots)):
             _, subplotName, subplotSummary = subplots[subplotIndex]
-            for (startPos, endPos) in search(search_regex, subplotName):
+            for (startPos, endPos) in search(searchRegex, subplotName):
                 # TODO: Add path.
                 # TODO: Duplicated code.
                 results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.name, subplotName, "",
                                             (startPos, endPos)))
 
-            for (startPos, endPos) in search(search_regex, subplotSummary):
+            for (startPos, endPos) in search(searchRegex, subplotSummary):
                 # TODO: Add path.
                 # TODO: Duplicated code.
                 results.append(searchResult("PlotStep", (plotId, subplotIndex), PlotStep.summary, subplotName, "",
@@ -331,17 +331,15 @@ class plotModel(QStandardItemModel):
 
         return results
 
-    def search_data(self, index, column):
+    def searchData(self, index, column):
         if column == Plot.characters:
             item = self.item(index, Plot.characters)
 
-            character_names = []
+            characterNames = []
             for i in range(item.rowCount()):
                 if mainWindow().mdlCharacter.getCharacterByID(item.child(i).text()):
-                    character_names.append(mainWindow().mdlCharacter.getCharacterByID(item.child(i).text()).name())
+                    characterNames.append(mainWindow().mdlCharacter.getCharacterByID(item.child(i).text()).name())
 
-            print('Plot', self.item(index, Plot.name).text())
-            print ("character_names", character_names)
-            return character_names
+            return characterNames
         else:
             return self.item(index, column).text()

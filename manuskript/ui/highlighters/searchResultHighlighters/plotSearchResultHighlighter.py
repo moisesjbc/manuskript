@@ -12,8 +12,8 @@ class plotSearchResultHighlighter(tabsSearchResultHighlighter):
     def __init__(self):
         super().__init__(mainWindow().tabPlot)
 
-    def open_view(self, search_result):
-        r = Ref.plotReference(search_result.id())
+    def openView(self, searchResult):
+        r = Ref.plotReference(searchResult.id())
         Ref.open(r)
 
     def widgetsMap(self):

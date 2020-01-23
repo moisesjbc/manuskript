@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QRect, QStandardPaths, QObject, QRegExp, QDir
 from PyQt5.QtCore import QUrl, QTimer
 from PyQt5.QtGui import QBrush, QIcon, QPainter, QColor, QImage, QPixmap
 from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtWidgets import qApp, QFileDialog, QTextEdit
+from PyQt5.QtWidgets import qApp, QFileDialog
 
 from manuskript.enums import Outline
 
@@ -443,16 +443,16 @@ def inspect():
         print("   " + "".join(s.code_context))
 
 
-def search(search_regex, text):
+def search(searchRegex, text):
     """
     Search all occurrences of a regex in a text.
 
-    :param search_regex:    a regex object with the search to perform
+    :param searchRegex:     a regex object with the search to perform
     :param text:            text to search on
-    :return:                list of tuples (start_pos, end_pos)
+    :return:                list of tuples (startPos, endPos)
     """
     if text is not None:
-        return [(m.start(), m.end()) for m in search_regex.finditer(text)]
+        return [(m.start(), m.end()) for m in searchRegex.finditer(text)]
     else:
         return []
 

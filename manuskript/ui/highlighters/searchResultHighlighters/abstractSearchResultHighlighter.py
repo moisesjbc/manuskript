@@ -9,5 +9,5 @@ class abstractSearchResultHighlighter():
     def __init__(self):
         pass
 
-    def highlight_search_result(self, search_result):
+    def highlightSearchResult(self, searchResult):
         raise NotImplementedError

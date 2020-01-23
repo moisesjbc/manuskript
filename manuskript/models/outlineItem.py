@@ -513,30 +513,30 @@ class outlineItem(abstractItem, searchableModel, searchableItem):
     def searchPath(self):
         return self.path()
 
-    def searchable_items(self):
+    def searchableItems(self):
         return self.children()
 
-    def search_occurrences(self, search_regex, columns):
-        return searchableItem.search_occurrences(self, search_regex, columns) + \
-            searchableModel.search_occurrences(self, search_regex, columns)
+    def searchOccurrences(self, searchRegex, columns):
+        return searchableItem.searchOccurrences(self, searchRegex, columns) + \
+            searchableModel.searchOccurrences(self, searchRegex, columns)
 
-    def search_data(self, column):
+    def searchData(self, column):
         mainWindow = F.mainWindow()
 
-        search_data = None
+        searchData = None
 
         if column == self.enum.POV and self.POV():
             character = mainWindow.mdlCharacter.getCharacterByID(self.POV())
             if character:
-                search_data = character.name()
+                searchData = character.name()
 
         elif column == self.enum.status:
-            search_data = mainWindow.mdlStatus.item(F.toInt(self.status()), 0).text()
+            searchData = mainWindow.mdlStatus.item(F.toInt(self.status()), 0).text()
 
         elif column == self.enum.label:
-            search_data = mainWindow.mdlLabels.item(F.toInt(self.label()), 0).text()
+            searchData = mainWindow.mdlLabels.item(F.toInt(self.label()), 0).text()
 
         else:
-            search_data = self.data(column)
+            searchData = self.data(column)
 
-        return search_data
+        return searchData

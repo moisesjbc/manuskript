@@ -360,32 +360,32 @@ class worldModel(QStandardItemModel, searchableModel):
     #######################################################################
     # Search
     #######################################################################
-    def search_occurrences(self, search_regex, columns):
+    def searchOccurrences(self, searchRegex, columns):
         """
         Search for occurrences of a regex in the given columns for all World items.
 
-        :param search_regex:    search regex
+        :param searchRegex:     search regex
         :param columns:         World columns for searching in
         :return:                list of searchResult instances
         """
         results = []
 
-        def _search_occurrences(item):
+        def _searchOccurrences(item):
             name = item.text()
             ID = self.itemID(item)
             path = self.path(item)
 
             for column in columns:
-                for (startPos, endPos) in search(search_regex, self.search_data(item, column)):
+                for (startPos, endPos) in search(searchRegex, self.searchData(item, column)):
                     results.append(searchResult("World", ID, column, name, path, (startPos, endPos)))
 
             for child in self.children(item):
-                _search_occurrences(child)
+                _searchOccurrences(child)
 
-        _search_occurrences(self.invisibleRootItem())
+        _searchOccurrences(self.invisibleRootItem())
         return results
 
-    def search_data(self, item, column):
+    def searchData(self, item, column):
         """
         Return data so search on from the given item and column
 

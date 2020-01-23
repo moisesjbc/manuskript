@@ -13,8 +13,8 @@ class characterSearchResultHighlighter(tabsSearchResultHighlighter):
     def __init__(self):
         super().__init__(mainWindow().tabPersos)
 
-    def open_view(self, search_result):
-        r = Ref.characterReference(search_result.id())
+    def openView(self, searchResult):
+        r = Ref.characterReference(searchResult.id())
         Ref.open(r)
         mainWindow().tabPersos.setEnabled(True)
 

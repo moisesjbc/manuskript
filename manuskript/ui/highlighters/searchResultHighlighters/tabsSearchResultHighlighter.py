@@ -16,9 +16,9 @@ class tabsSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def widgetsMap(self):
         raise RuntimeError
 
-    def retrieve_widget(self, search_result):
-        tab_index, widget_name, widget_class = self.widgetsMap()[search_result.column()]
+    def retrieveWidget(self, searchResult):
+        tabIndex, widgetName, widgetClass = self.widgetsMap()[searchResult.column()]
 
         self._tabWidget.setEnabled(True)
-        self._tabWidget.setCurrentIndex(tab_index)
-        return self._tabWidget.findChild(widget_class, widget_name)
+        self._tabWidget.setCurrentIndex(tabIndex)
+        return self._tabWidget.findChild(widgetClass, widgetName)

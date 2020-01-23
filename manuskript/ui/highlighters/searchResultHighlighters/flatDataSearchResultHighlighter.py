@@ -11,10 +11,10 @@ class flatDataSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def __init__(self):
         super().__init__()
 
-    def open_view(self, search_result):
+    def openView(self, searchResult):
         mainWindow().tabMain.setCurrentIndex(mainWindow().TabSummary)
 
-    def retrieve_widget(self, search_result):
+    def retrieveWidget(self, searchResult):
         editors = {
             FlatData.summarySituation: (0, "txtSummarySituation", QLineEdit),
             FlatData.summarySentence: (0, "txtSummarySentence", QTextEdit),
@@ -23,7 +23,7 @@ class flatDataSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
             FlatData.summaryFull: (3, "txtSummaryFull", QTextEdit)
         }
 
-        stack_index, editor_name, editor_class = editors[search_result.column()]
+        stackIndex, editorName, editorClass = editors[searchResult.column()]
 
-        mainWindow().tabSummary.setCurrentIndex(stack_index)
-        return mainWindow().tabSummary.findChild(editor_class, editor_name)
+        mainWindow().tabSummary.setCurrentIndex(stackIndex)
+        return mainWindow().tabSummary.findChild(editorClass, editorName)

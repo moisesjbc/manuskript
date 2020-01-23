@@ -14,8 +14,8 @@ class flatDataModelWrapper(searchableModel):
     are stored directly on a GUI element (QStandardItemModel). We wrap this GUI element inside this wrapper class
     so it exposes the same interface for searches.
     """
-    def __init__(self, qstandard_item_model, tr):
-        self.qstandard_item_model = qstandard_item_model
+    def __init__(self, qStandardItemModel, tr):
+        self.qStandardItemModel = qStandardItemModel
         self.tr = tr
 
     def column_info(self, column):
@@ -26,13 +26,13 @@ class flatDataModelWrapper(searchableModel):
             FlatData.summaryPage: (3, self.tr("One page summary"), "{}".format(self.tr("Summary"))),
             FlatData.summaryFull: (4, self.tr("Full summary"), "{}".format(self.tr("Summary")))
         }
-        column_index, column_title, column_path = column_data[column]
-        return self.qstandard_item_model.item(1, column_index).text(), column_title, column_path
+        columnIndex, columnTitle, columnPath = column_data[column]
+        return self.qStandardItemModel.item(1, columnIndex).text(), columnTitle, columnPath
 
-    def search_occurrences(self, search_regex, columns):
+    def searchOccurrences(self, searchRegex, columns):
         results = []
 
         for column in columns:
-            column_text, column_title, column_path = self.column_info(column)
-            results += [searchResult("FlatData", None, column, column_title, column_path, (start, end)) for start, end in search(search_regex, column_text)]
+            columnText, columnTitle, columnPath = self.column_info(column)
+            results += [searchResult("FlatData", None, column, columnTitle, columnPath, (start, end)) for start, end in search(searchRegex, columnText)]
         return results

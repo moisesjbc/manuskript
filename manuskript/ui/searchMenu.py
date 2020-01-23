@@ -2,7 +2,7 @@
 # --!-- coding: utf8 --!--
 from PyQt5.QtWidgets import QMenu, QAction
 
-from manuskript.enums import Outline, Character, FlatData, World, Plot, SearchOption, PlotStep
+from manuskript.enums import Outline, Character, FlatData, World, Plot, SearchOption
 from manuskript.ui.searchFiltersSubMenu import searchFiltersSubMenu
 
 
@@ -11,17 +11,17 @@ class searchMenu(QMenu):
         QMenu.__init__(self, parent)
 
         self._filter_actions = {}
-        self._option_actions = []
+        self._optionActions = []
 
-        self._add_section_header("Search in:")
-        self._add_character_filters()
-        self._add_flat_data_filters()
-        self._add_outline_filters()
-        self._add_plot_filters()
-        self._add_world_filters()
+        self._addSectionHeader("Search in:")
+        self._addCharacterFilters()
+        self._addFlatDataFilters()
+        self._addOutlineFilters()
+        self._addPlotFilters()
+        self._addWorldFilters()
         self.addSeparator()
 
-        self._add_options()
+        self._addOptions()
 
     def _add_filters_submenu(self, title, filters_info):
         action = QAction(self.tr(title), self)
@@ -31,7 +31,7 @@ class searchMenu(QMenu):
         self._filter_actions[title] = action
         self.addAction(action)
 
-    def _add_outline_filters(self):
+    def _addOutlineFilters(self):
         self._add_filters_submenu("Outline", [
             ("Title", [Outline.title]),
             ("Text", [Outline.text]),
@@ -43,7 +43,7 @@ class searchMenu(QMenu):
             ("Label", [Outline.label])
         ])
 
-    def _add_character_filters(self):
+    def _addCharacterFilters(self):
         self._add_filters_submenu("Character", [
             ("Motivation", [Character.motivation]),
             ("Goal", [Character.goal]),
@@ -56,7 +56,7 @@ class searchMenu(QMenu):
             ("Notes", [Character.notes]),
         ])
 
-    def _add_flat_data_filters(self):
+    def _addFlatDataFilters(self):
         self._add_filters_submenu("FlatData", [
             ("Summary situation", [FlatData.summarySituation]),
             ("Summary sentence", [FlatData.summarySentence]),
@@ -65,7 +65,7 @@ class searchMenu(QMenu):
             ("Summary full", [FlatData.summaryFull])
         ])
 
-    def _add_plot_filters(self):
+    def _addPlotFilters(self):
         self._add_filters_submenu("Plot", [
             ("Name", [Plot.name]),
             ("Characters", [Plot.characters]),
@@ -74,7 +74,7 @@ class searchMenu(QMenu):
             ("Steps", [Plot.steps])
         ])
 
-    def _add_world_filters(self):
+    def _addWorldFilters(self):
         self._add_filters_submenu("World", [
             ("Name", [World.name]),
             ("Description", [World.description]),
@@ -82,36 +82,36 @@ class searchMenu(QMenu):
             ("Conflict", [World.conflict])
         ])
 
-    def _add_options(self):
+    def _addOptions(self):
         options = [
             ("Case sensitive", True, SearchOption.caseSensitive),
             ("Match words", False, SearchOption.matchWords)
         ]
 
-        self._add_section_header("Options")
+        self._addSectionHeader("Options")
 
         for title, checked, option in options:
             a = QAction(title, self)
             a.setCheckable(True)
             a.setChecked(checked)
             a.setData(option)
-            self._option_actions.append(a)
+            self._optionActions.append(a)
             self.addAction(a)
 
-    def _add_section_header(self, title):
+    def _addSectionHeader(self, title):
         action = QAction(self.tr(title), self)
         action.setEnabled(False)
         self.addAction(action)
         self.addSeparator()
 
-    def columns(self, model_prefix):
-        return self._filter_actions[model_prefix].menu().columns()
+    def columns(self, modelPrefix):
+        return self._filter_actions[modelPrefix].menu().columns()
 
     def options(self):
         options = []
 
-        for option_action in self._option_actions:
-            if option_action.isChecked():
-                options.append(option_action.data())
+        for optionAction in self._optionActions:
+            if optionAction.isChecked():
+                options.append(optionAction.data())
 
         return options

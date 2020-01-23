@@ -12,20 +12,20 @@ class plotStepSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
     def __init__(self):
         super().__init__()
 
-    def open_view(self, search_result):
-        r = Ref.plotReference(search_result.id()[0])
+    def openView(self, searchResult):
+        r = Ref.plotReference(searchResult.id()[0])
         Ref.open(r)
 
-    def retrieve_widget(self, search_result):
+    def retrieveWidget(self, searchResult):
         mainWindow().tabPlot.setCurrentIndex(1)
         lstSubPlots = mainWindow().tabPlot.findChild(QTableView, "lstSubPlots")
 
-        lstSubPlots.setCurrentIndex(lstSubPlots.model().index(search_result.id()[1], PlotStep.ID, lstSubPlots.rootIndex()))
+        lstSubPlots.setCurrentIndex(lstSubPlots.model().index(searchResult.id()[1], PlotStep.ID, lstSubPlots.rootIndex()))
 
-        if search_result.column() == PlotStep.name:
+        if searchResult.column() == PlotStep.name:
             # For plot step names, we trigger an edition on the plot steps list. By doing this, an editor is created
             # for that plot so we can highlight it later.
-            lstSubPlots.edit(lstSubPlots.model().index(search_result.id()[1], 0, lstSubPlots.rootIndex()))
+            lstSubPlots.edit(lstSubPlots.model().index(searchResult.id()[1], 0, lstSubPlots.rootIndex()))
 
         if lstSubPlots.currentIndex().isValid():
             widgetsMap = {
@@ -33,7 +33,7 @@ class plotStepSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
                 PlotStep.summary: ("txtSubPlotSummary", QTextEdit)
             }
 
-            widgetName, widgetClass = widgetsMap[search_result.column()]
+            widgetName, widgetClass = widgetsMap[searchResult.column()]
             return mainWindow().tabPlot.findChild(widgetClass, widgetName)
         else:
             return None

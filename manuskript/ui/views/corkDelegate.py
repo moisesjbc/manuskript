@@ -43,19 +43,11 @@ class corkDelegate(QStyledItemDelegate):
         return QStyledItemDelegate.editorEvent(self, event, model, option, index)
 
     def createEditor(self, parent, option, index):
-        # When the user performs a global search and selects an Outline result (title or summary), the
-        # associated chapter is selected in cork view, triggering a call to this method with the results
-        # list widget set in self.sender(). In this case we store the searched column so we know which
-        # editor should be created.
-        searched_column = None
-        if self.sender() is not None and self.sender().objectName() == 'result' and self.sender().currentItem():
-            searched_column = self.sender().currentItem().data(Qt.UserRole).column()
-
         self.updateRects(option, index)
 
         bgColor = self.bgColors.get(index, "white")
 
-        if searched_column == Outline.summarySentence or (self.lastPos is not None and self.mainLineRect.contains(self.lastPos)):
+        if self.mainLineRect.contains(self.lastPos):
             # One line summary
             self.editing = Outline.summarySentence
             edt = QLineEdit(parent)
@@ -72,7 +64,7 @@ class corkDelegate(QStyledItemDelegate):
             edt.setStyleSheet("background: {}; color: black;".format(bgColor))
             return edt
 
-        elif searched_column == Outline.title or (self.lastPos is not None and self.titleRect.contains(self.lastPos)):
+        elif self.titleRect.contains(self.lastPos):
             # Title
             self.editing = Outline.title
             edt = QLineEdit(parent)

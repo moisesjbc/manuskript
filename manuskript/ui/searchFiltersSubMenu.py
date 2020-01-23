@@ -4,20 +4,20 @@ from PyQt5.QtWidgets import QMenu, QAction
 
 
 class searchFiltersSubMenu(QMenu):
-    def __init__(self, title, all_selected, items, parent=None):
+    def __init__(self, title, allSelected, items, parent=None):
         QMenu.__init__(self, parent)
 
-        self._add_all_option(title, all_selected)
+        self._addAllOption(title, allSelected)
         self.addSeparator()
-        self._add_options(items, all_selected)
+        self._addOptions(items, allSelected)
 
-    def _add_all_option(self, title, selected):
+    def _addAllOption(self, title, selected):
         action = QAction(self.tr(title), self)
 
         action.setText(title)
         action.setCheckable(True)
         action.setChecked(selected)
-        action.triggered.connect(self._on_all_triggered)
+        action.triggered.connect(self._onAllTriggered)
 
         self.addAction(action)
 
@@ -27,20 +27,20 @@ class searchFiltersSubMenu(QMenu):
     def filterActions(self):
         return self.actions()[2:]
 
-    def _add_options(self, items, all_selected):
+    def _addOptions(self, items, allSelected):
         for (title, columns) in items:
             if not isinstance(columns, list):
                 columns = [columns]
             action = QAction(self.tr(title), self)
 
             action.setCheckable(True)
-            action.setChecked(all_selected)
+            action.setChecked(allSelected)
             action.setData(columns)
-            action.triggered.connect(self._on_filter_triggered)
+            action.triggered.connect(self._onFilterTriggered)
 
             self.addAction(action)
 
-    def _on_filter_triggered(self):
+    def _onFilterTriggered(self):
         for action in self.filterActions():
             if not action.isChecked():
                 self.allAction().setChecked(False)
@@ -49,7 +49,7 @@ class searchFiltersSubMenu(QMenu):
         self.allAction().setChecked(True)
         return
 
-    def _on_all_triggered(self):
+    def _onAllTriggered(self):
         for action in self.filterActions():
             action.setChecked(self.allAction().isChecked())
 

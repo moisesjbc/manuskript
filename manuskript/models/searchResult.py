@@ -3,9 +3,9 @@
 
 
 class searchResult():
-    def __init__(self, model_type, model_id, column, title, path, pos):
-        self._type = model_type
-        self._id = model_id
+    def __init__(self, modelType, modelID, column, title, path, pos):
+        self._type = modelType
+        self._id = modelID
         self._column = column
         self._title = title
         self._path = path

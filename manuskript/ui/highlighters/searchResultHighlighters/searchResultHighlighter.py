@@ -14,20 +14,20 @@ class searchResultHighlighter(abstractSearchResultHighlighter):
     def __init__(self):
         super().__init__()
 
-    def highlight_search_result(self, search_result):
-        if search_result.type() == "Character":
+    def highlightSearchResult(self, searchResult):
+        if searchResult.type() == "Character":
             highlighter = characterSearchResultHighlighter()
-        elif search_result.type() == "FlatData":
+        elif searchResult.type() == "FlatData":
             highlighter = flatDataSearchResultHighlighter()
-        elif search_result.type() == "outlineItem":
+        elif searchResult.type() == "outlineItem":
             highlighter = outlineSearchResultHighlighter()
-        elif search_result.type() == "World":
+        elif searchResult.type() == "World":
             highlighter = worldSearchResultHighlighter()
-        elif search_result.type() == "Plot":
+        elif searchResult.type() == "Plot":
             highlighter = plotSearchResultHighlighter()
-        elif search_result.type() == "PlotStep":
+        elif searchResult.type() == "PlotStep":
             highlighter = plotStepSearchResultHighlighter()
         else:
             raise NotImplementedError
 
-        highlighter.highlight_search_result(search_result)
+        highlighter.highlightSearchResult(searchResult)

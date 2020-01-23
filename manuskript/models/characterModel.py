@@ -220,7 +220,7 @@ class characterModel(QAbstractItemModel, searchableModel):
             c.infos.pop(r)
             self.endRemoveRows()
 
-    def searchable_items(self):
+    def searchableItems(self):
         for character in self.characters:
             yield character
 
@@ -308,23 +308,23 @@ class Character(searchableItem):
     def searchTitle(self):
         return self.name()
 
-    def search_data(self, column):
+    def searchData(self, column):
         if column == C.infos:
             return self.infos
         else:
             return self.data(column)
 
-    def search_occurrences(self, search_regex, columns):
+    def searchOccurrences(self, searchRegex, columns):
         results = []
 
         for column in columns:
-            data = self.search_data(column)
+            data = self.searchData(column)
             if isinstance(data, list):
                 for i in range(0, len(data)):
-                    if len(search(search_regex, data[i].description)) or len(search(search_regex, data[i].value)):
-                        results.append(self.wrap_search_occurrence(column, i, i))
+                    if len(search(searchRegex, data[i].description)) or len(search(searchRegex, data[i].value)):
+                        results.append(self.wrapSearchOccurrence(column, i, i))
             else:
-                results += super().search_occurrences(search_regex, [column])
+                results += super().searchOccurrences(searchRegex, [column])
 
         return results
 

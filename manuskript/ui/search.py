@@ -11,7 +11,6 @@ from manuskript.ui import style
 from manuskript.ui.search_ui import Ui_search
 
 from manuskript.models.flatDataModelWrapper import flatDataModelWrapper
-from manuskript.models.searchableItem import searchResult
 from manuskript.ui.searchMenu import searchMenu
 from manuskript.ui.highlighters.searchResultHighlighters.searchResultHighlighter import searchResultHighlighter
 
@@ -37,7 +36,7 @@ class search(QWidget, Ui_search):
 
         self.searchResultHighlighter = searchResultHighlighter()
 
-    def prepare_regex(self, search_text):
+    def prepareRegex(self, searchText):
         search_options = self.searchMenu.options()
 
         flags = re.UNICODE
@@ -46,49 +45,49 @@ class search(QWidget, Ui_search):
             flags |= re.IGNORECASE
 
         # TODO: Apply re.escape conditionally once REGEX searches are implemented.
-        search_text = re.escape(search_text)
+        searchText = re.escape(searchText)
 
         if SearchOption.matchWords in search_options:
             # Source: https://stackoverflow.com/a/15863102
-            search_text = r'\b%s\b' % search_text
+            searchText = r'\b%s\b' % searchText
 
-        return re.compile(search_text, flags)
+        return re.compile(searchText, flags)
 
     def search(self):
         self.result.clear()
 
-        search_text = self.searchTextInput.text()
-        if len(search_text) > 0:
-            search_regex = self.prepare_regex(search_text)
+        searchText = self.searchTextInput.text()
+        if len(searchText) > 0:
+            searchRegex = self.prepareRegex(searchText)
             results = []
 
             # Set override cursor
             qApp.setOverrideCursor(Qt.WaitCursor)
 
-            for model, model_prefix in [
+            for model, modelPrefix in [
                 (mainWindow().mdlOutline, "Outline"),
                 (mainWindow().mdlCharacter, "Character"),
                 (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData"),
                 (mainWindow().mdlWorld, "World"),
                 (mainWindow().mdlPlots, "Plot")
             ]:
-                filtered_columns = self.searchMenu.columns(model_prefix)
+                filteredColumns = self.searchMenu.columns(modelPrefix)
 
-                if model_prefix == "Plot":
-                    print(filtered_columns)
+                if modelPrefix == "Plot":
+                    print(filteredColumns)
 
                 # Searching
-                results += model.search_occurrences(search_regex, filtered_columns)
+                results += model.searchOccurrences(searchRegex, filteredColumns)
 
             print('results', results)
 
             # Showing results
-            self.generate_results_lists(results)
+            self.generateResultsLists(results)
 
             # Remove override cursor
             qApp.restoreOverrideCursor()
 
-    def generate_results_lists(self, results):
+    def generateResultsLists(self, results):
         for result in results:
             item = QListWidgetItem(result.title(), self.result)
             item.setData(Qt.UserRole, result)
@@ -96,7 +95,7 @@ class search(QWidget, Ui_search):
             self.result.addItem(item)
 
     def openItem(self, item):
-        self.searchResultHighlighter.highlight_search_result(item.data(Qt.UserRole))
+        self.searchResultHighlighter.highlightSearchResult(item.data(Qt.UserRole))
 
 class listResultDelegate(QStyledItemDelegate):
     def __init__(self, parent=None):

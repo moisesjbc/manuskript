@@ -12,8 +12,8 @@ class worldSearchResultHighlighter(tabsSearchResultHighlighter):
     def __init__(self):
         super().__init__(mainWindow().tabWorld)
 
-    def open_view(self, search_result):
-        r = Ref.worldReference(search_result.id())
+    def openView(self, searchResult):
+        r = Ref.worldReference(searchResult.id())
         Ref.open(r)
 
     def widgetsMap(self):

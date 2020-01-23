@@ -6,7 +6,7 @@ from manuskript.ui.searchMenu import searchMenu
 from manuskript.enums import Outline, Character, FlatData, World, SearchOption, Plot
 
 
-def trigger_filter(filter_key, actions):
+def triggerFilter(filter_key, actions):
     list(filter(lambda action: action.data() == filter_key, actions))[0].trigger()
 
 
@@ -15,7 +15,7 @@ def search_menu():
     return searchMenu()
 
 
-def test_search_menu_actions(search_menu):
+def test_searchMenuActions(search_menu):
     assert [action.text() for action in search_menu.actions()] == [
         search_menu.tr("Search in:"),
         '',
@@ -32,7 +32,7 @@ def test_search_menu_actions(search_menu):
     ]
 
 
-def test_search_menu_default_columns(search_menu):
+def test_searchMenuDefaultColumns(search_menu):
     """
     By default all model columns are selected.
     """
@@ -62,36 +62,5 @@ def test_search_menu_default_columns(search_menu):
     }
 
 
-def test_search_menu_default_options(search_menu):
+def test_searchMenuDefaultOptions(search_menu):
     assert search_menu.options() == [SearchOption.caseSensitive]
-
-"""
-def test_search_menu_no_columns():
-    ""
-    When deselecting "All" filter, no filter is selected by default
-    ""
-    search_menu = searchMenu()
-
-    trigger_filter("All", search_menu.actions())
-
-    assert set(search_menu.columns("Outline")) == set()
-    assert set(search_menu.columns("Character")) == set()
-    assert set(search_menu.columns("FlatData")) == set()
-
-
-def test_search_menu_some_columns():
-    ""
-    When deselecting "All" filter and selecting some filters only the columns associated to those filters are enabled.
-    ""
-    search_menu = searchMenu()
-
-    trigger_filter("All", search_menu.actions())
-    trigger_filter("OutlineNotes", search_menu.actions())
-    trigger_filter("CharacterGoal", search_menu.actions())
-    trigger_filter("CharacterNotes", search_menu.actions())
-    trigger_filter("FlatDataSummarySentence", search_menu.actions())
-
-    assert set(search_menu.columns("Outline")) == {Outline.notes}
-    assert set(search_menu.columns("Character")) == {Character.goal, Character.notes}
-    assert set(search_menu.columns("FlatData")) == {FlatData.summarySentence}
-"""

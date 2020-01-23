@@ -4,11 +4,11 @@
 
 class searchableModel():
 
-    def search_occurrences(self, search_regex, columns):
+    def searchOccurrences(self, searchRegex, columns):
         results = []
-        for item in self.searchable_items():
-            results += item.search_occurrences(search_regex, columns)
+        for item in self.searchableItems():
+            results += item.searchOccurrences(searchRegex, columns)
         return results
 
-    def searchable_items(self):
+    def searchableItems(self):
         raise NotImplementedError
