@@ -44,8 +44,8 @@ class search(QWidget, Ui_search):
         if SearchOption.caseSensitive not in search_options:
             flags |= re.IGNORECASE
 
-        # TODO: Apply re.escape conditionally once REGEX searches are implemented.
-        searchText = re.escape(searchText)
+        if SearchOption.regex not in search_options:
+            searchText = re.escape(searchText)
 
         if SearchOption.matchWords in search_options:
             # Source: https://stackoverflow.com/a/15863102

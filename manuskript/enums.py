@@ -77,4 +77,5 @@ class FlatData(IntEnum):
 
 class SearchOption(IntEnum):
     caseSensitive = 0,
-    matchWords = 1
+    matchWords = 1,
+    regex = 2

@@ -85,7 +85,8 @@ class searchMenu(QMenu):
     def _addOptions(self):
         options = [
             ("Case sensitive", True, SearchOption.caseSensitive),
-            ("Match words", False, SearchOption.matchWords)
+            ("Match words", False, SearchOption.matchWords),
+            ("Regex", False, SearchOption.regex)
         ]
 
         self._addSectionHeader("Options")

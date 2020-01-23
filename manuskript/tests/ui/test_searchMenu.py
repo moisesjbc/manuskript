@@ -28,7 +28,8 @@ def test_searchMenuActions(search_menu):
         search_menu.tr("Options"),
         '',
         search_menu.tr("Case sensitive"),
-        search_menu.tr("Match words")
+        search_menu.tr("Match words"),
+        search_menu.tr("Regex")
     ]
 
 
