@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manuskript/ui/search_ui.ui'
 #
-# Created by: PyQt5 UI code generator 5.4.2
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -34,6 +34,11 @@ class Ui_search(object):
         self.btnOptions.setObjectName("btnOptions")
         self.horizontalLayout.addWidget(self.btnOptions)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.lblResultsCounter = QtWidgets.QLabel(search)
+        self.lblResultsCounter.setText("")
+        self.lblResultsCounter.setAlignment(QtCore.Qt.AlignCenter)
+        self.lblResultsCounter.setObjectName("lblResultsCounter")
+        self.verticalLayout.addWidget(self.lblResultsCounter)
         self.result = QtWidgets.QListWidget(search)
         self.result.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.result.setObjectName("result")

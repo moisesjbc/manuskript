@@ -517,8 +517,15 @@ class outlineItem(abstractItem, searchableModel, searchableItem):
         return self.children()
 
     def searchOccurrences(self, searchRegex, columns):
-        return searchableItem.searchOccurrences(self, searchRegex, columns) + \
-            searchableModel.searchOccurrences(self, searchRegex, columns)
+        results = []
+
+        if self.parent():
+            # Don't search on root node.
+            results += searchableItem.searchOccurrences(self, searchRegex, columns)
+
+        results += searchableModel.searchOccurrences(self, searchRegex, columns)
+
+        return results
 
     def searchData(self, column):
         mainWindow = F.mainWindow()

@@ -76,11 +76,23 @@ class search(QWidget, Ui_search):
 
             print('results', results)
 
+            self.lblResultsCounter.setText(self.generateResultsCountText(len(results)))
+
             # Showing results
             self.generateResultsLists(results)
 
             # Remove override cursor
             qApp.restoreOverrideCursor()
+        else:
+            self.lblResultsCounter.setText(self.generateResultsCountText(0))
+
+    def generateResultsCountText(self, nResults):
+        if nResults == 0:
+            return self.tr("No results found")
+        elif nResults == 1:
+            return self.tr("1 result found")
+        else:
+            return self.tr("%d results found" % nResults)
 
     def generateResultsLists(self, results):
         modelPrefixes = {
