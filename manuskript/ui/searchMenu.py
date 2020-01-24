@@ -45,6 +45,7 @@ class searchMenu(QMenu):
 
     def _addCharacterFilters(self):
         self._add_filters_submenu("Character", [
+            ("Name", [Character.name]),
             ("Motivation", [Character.motivation]),
             ("Goal", [Character.goal]),
             ("Conflict", [Character.conflict]),

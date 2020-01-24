@@ -5,7 +5,7 @@
 from manuskript.models import references as Ref
 from manuskript.functions import mainWindow
 from manuskript.enums import Character
-from PyQt5.QtWidgets import QTextEdit, QTableView
+from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit
 from manuskript.ui.highlighters.searchResultHighlighters.tabsSearchResultHighlighter import tabsSearchResultHighlighter
 
 
@@ -20,6 +20,7 @@ class characterSearchResultHighlighter(tabsSearchResultHighlighter):
 
     def widgetsMap(self):
         return {
+            Character.name: (0, "txtPersoName", QLineEdit),
             Character.goal: (0, "txtPersoGoal", QTextEdit),
             Character.motivation: (0, "txtPersoMotivation", QTextEdit),
             Character.conflict: (0, "txtPersoConflict", QTextEdit),
