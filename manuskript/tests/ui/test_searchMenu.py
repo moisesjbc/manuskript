@@ -44,7 +44,7 @@ def test_searchMenuDefaultColumns(search_menu):
     }
 
     assert set(search_menu.columns("Character")) == {
-        Character.motivation, Character.goal, Character.conflict,
+        Character.name, Character.motivation, Character.goal, Character.conflict,
         Character.epiphany, Character.summarySentence, Character.summaryPara,
         Character.summaryFull, Character.infos, Character.notes
     }
