@@ -8,6 +8,7 @@ from manuskript.ui.highlighters.searchResultHighlighters.outlineSearchResultHigh
 from manuskript.ui.highlighters.searchResultHighlighters.worldSearchResultHighlighter import worldSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.plotSearchResultHighlighter import plotSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.plotStepSearchResultHighlighter import plotStepSearchResultHighlighter
+from manuskript.enums import SearchModel
 
 
 class searchResultHighlighter(abstractSearchResultHighlighter):
@@ -15,19 +16,14 @@ class searchResultHighlighter(abstractSearchResultHighlighter):
         super().__init__()
 
     def highlightSearchResult(self, searchResult):
-        if searchResult.type() == "Character":
-            highlighter = characterSearchResultHighlighter()
-        elif searchResult.type() == "FlatData":
-            highlighter = flatDataSearchResultHighlighter()
-        elif searchResult.type() == "outlineItem":
-            highlighter = outlineSearchResultHighlighter()
-        elif searchResult.type() == "World":
-            highlighter = worldSearchResultHighlighter()
-        elif searchResult.type() == "Plot":
-            highlighter = plotSearchResultHighlighter()
-        elif searchResult.type() == "PlotStep":
-            highlighter = plotStepSearchResultHighlighter()
-        else:
-            raise NotImplementedError
+        highlighters = {
+            SearchModel.outline: outlineSearchResultHighlighter,
+            SearchModel.character: characterSearchResultHighlighter,
+            SearchModel.flatData: flatDataSearchResultHighlighter,
+            SearchModel.world: worldSearchResultHighlighter,
+            SearchModel.plot: plotSearchResultHighlighter,
+            SearchModel.plotStep: plotStepSearchResultHighlighter
+        }
+        highlighter = highlighters[searchResult.type()]()
 
         highlighter.highlightSearchResult(searchResult)

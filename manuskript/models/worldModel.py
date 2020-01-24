@@ -7,7 +7,7 @@ from PyQt5.QtGui import QStandardItem, QBrush, QFontMetrics
 from PyQt5.QtGui import QStandardItemModel, QColor
 from PyQt5.QtWidgets import QMenu, QAction, qApp
 
-from manuskript.enums import World
+from manuskript.enums import World, SearchModel
 from manuskript.functions import mainWindow
 from manuskript.ui import style as S
 from manuskript.models.searchableModel import searchableModel
@@ -377,7 +377,7 @@ class worldModel(QStandardItemModel, searchableModel):
 
             for column in columns:
                 for (startPos, endPos) in search(searchRegex, self.searchData(item, column)):
-                    results.append(searchResult("World", ID, column, name, path, (startPos, endPos)))
+                    results.append(searchResult(SearchModel.world, ID, column, name, path, (startPos, endPos)))
 
             for child in self.children(item):
                 _searchOccurrences(child)

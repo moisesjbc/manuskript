@@ -5,7 +5,11 @@
 from manuskript.models.searchResult import searchResult
 from manuskript.functions import search
 
+
 class searchableItem():
+    def __init__(self, searchModel):
+        self._searchModel = searchModel
+
     def searchOccurrences(self, searchRegex, columns):
         results = []
         for column in columns:
@@ -13,7 +17,7 @@ class searchableItem():
         return results
 
     def wrapSearchOccurrence(self, column, startPos, endPos):
-        return searchResult(self.__class__.__name__, self.ID(), column, self.searchTitle(), self.searchPath(), (startPos, endPos))
+        return searchResult(self._searchModel, self.ID(), column, self.searchTitle(), self.searchPath(), (startPos, endPos))
 
     def searchTitle(self):
         raise NotImplementedError

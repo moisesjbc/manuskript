@@ -14,7 +14,7 @@ from manuskript.models.flatDataModelWrapper import flatDataModelWrapper
 from manuskript.ui.searchMenu import searchMenu
 from manuskript.ui.highlighters.searchResultHighlighters.searchResultHighlighter import searchResultHighlighter
 
-from manuskript.enums import SearchOption
+from manuskript.enums import SearchOption, SearchModel
 
 
 class search(QWidget, Ui_search):
@@ -71,13 +71,8 @@ class search(QWidget, Ui_search):
                 (mainWindow().mdlWorld, "World"),
                 (mainWindow().mdlPlots, "Plot")
             ]:
-                filteredColumns = self.searchMenu.columns(modelPrefix)
-
-                if modelPrefix == "Plot":
-                    print(filteredColumns)
-
                 # Searching
-                results += model.searchOccurrences(searchRegex, filteredColumns)
+                results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelPrefix))
 
             print('results', results)
 
@@ -88,10 +83,19 @@ class search(QWidget, Ui_search):
             qApp.restoreOverrideCursor()
 
     def generateResultsLists(self, results):
+        modelPrefixes = {
+            SearchModel.outline: "Outline",
+            SearchModel.character: "Characters",
+            SearchModel.flatData: "Flat data",
+            SearchModel.world: "World",
+            SearchModel.plot: "Plots",
+            SearchModel.plotStep: "Plot steps"
+        }
+
         for result in results:
             item = QListWidgetItem(result.title(), self.result)
             item.setData(Qt.UserRole, result)
-            item.setData(Qt.UserRole + 1, result.path())
+            item.setData(Qt.UserRole + 1, self.tr(modelPrefixes[result.type()]) + " > " + result.path())
             self.result.addItem(item)
 
     def openItem(self, item):

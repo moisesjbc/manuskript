@@ -6,6 +6,7 @@ from manuskript.enums import FlatData
 from manuskript.models.searchableModel import searchableModel
 from manuskript.functions import search
 from manuskript.models.searchResult import searchResult
+from manuskript.enums import SearchModel
 
 
 class flatDataModelWrapper(searchableModel):
@@ -34,5 +35,5 @@ class flatDataModelWrapper(searchableModel):
 
         for column in columns:
             columnText, columnTitle, columnPath = self.column_info(column)
-            results += [searchResult("FlatData", None, column, columnTitle, columnPath, (start, end)) for start, end in search(searchRegex, columnText)]
+            results += [searchResult(SearchModel.flatData, None, column, columnTitle, columnPath, (start, end)) for start, end in search(searchRegex, columnText)]
         return results

@@ -74,8 +74,15 @@ class FlatData(IntEnum):
     summaryPage = 3,
     summaryFull = 4
 
-
 class SearchOption(IntEnum):
     caseSensitive = 0,
     matchWords = 1,
     regex = 2
+
+class SearchModel(IntEnum):
+    outline = 0,
+    character = 1,
+    flatData = 2,
+    world = 3,
+    plot = 4,
+    plotStep = 5

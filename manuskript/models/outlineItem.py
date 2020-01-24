@@ -7,7 +7,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import qApp
 from lxml import etree as ET
-from manuskript.models.searchResult import searchResult
 from manuskript.models.abstractItem import abstractItem
 from manuskript.models.searchableModel import searchableModel
 from manuskript.models.searchableItem import searchableItem
@@ -15,7 +14,7 @@ from manuskript import enums
 from manuskript import functions as F
 from manuskript import settings
 from manuskript.converters import HTML2PlainText
-from manuskript.functions import search
+from manuskript.enums import SearchModel
 
 
 try:
@@ -35,6 +34,7 @@ class outlineItem(abstractItem, searchableModel, searchableItem):
 
     def __init__(self, model=None, title="", _type="folder", xml=None, parent=None, ID=None):
         abstractItem.__init__(self, model, title, _type, xml, parent, ID)
+        searchableItem.__init__(self, SearchModel.outline)
 
         self.defaultTextType = None
         if not self._data.get(self.enum.compile):

@@ -4,7 +4,7 @@ from PyQt5.QtCore import QModelIndex, Qt, QAbstractItemModel, QVariant
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 
 from manuskript.functions import randomColor, iconColor, mainWindow, search
-from manuskript.enums import Character as C
+from manuskript.enums import Character as C, SearchModel
 
 from manuskript.models.searchableModel import searchableModel
 from manuskript.models.searchableItem import searchableItem
@@ -230,6 +230,7 @@ class characterModel(QAbstractItemModel, searchableModel):
 
 class Character(searchableItem):
     def __init__(self, model, name="No name"):
+        searchableItem.__init__(self, SearchModel.character)
         self._model = model
         self.lastPath = ""
 
@@ -306,6 +307,9 @@ class Character(searchableItem):
         return r
 
     def searchTitle(self):
+        return self.name()
+
+    def searchPath(self):
         return self.name()
 
     def searchData(self, column):
