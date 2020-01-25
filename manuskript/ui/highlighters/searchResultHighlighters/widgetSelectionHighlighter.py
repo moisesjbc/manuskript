@@ -2,7 +2,7 @@
 # --!-- coding: utf8 --!--
 
 from PyQt5.QtGui import QTextCursor
-from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QLabel, QListView
+from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QLabel, QListView, QComboBox
 from PyQt5.QtCore import QItemSelectionModel
 
 
@@ -24,6 +24,8 @@ class widgetSelectionHighlighter():
             self._highlightListSearchResult(widget, startPos)
         elif isinstance(widget, QLabel):
             self._highlightLabelSearchResult(widget)
+        elif isinstance(widget, QComboBox):
+            self._highlightComboBoxSearchResult(widget)
         else:
             raise NotImplementedError
 
@@ -90,3 +92,11 @@ class widgetSelectionHighlighter():
 
         # Highlight search result on label.
         label.setStyleSheet("background-color: steelblue")
+
+    def _highlightComboBoxSearchResult(self, comboBox):
+        # On focus out, clear combo box highlighting.
+        old_style = comboBox.styleSheet()
+        self.generateClearHandler(comboBox, lambda widget: widget.setStyleSheet(old_style))
+
+        # Highlight combo box.
+        comboBox.setStyleSheet("background-color: steelblue")

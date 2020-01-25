@@ -5,7 +5,7 @@ from manuskript.models import references as Ref
 from manuskript.enums import Outline
 from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSpecificSearchResultHighlighter
 from manuskript.functions import mainWindow
-from PyQt5.QtWidgets import QTextEdit, QLineEdit, QLabel
+from PyQt5.QtWidgets import QTextEdit, QLineEdit, QComboBox
 from manuskript.ui.views.metadataView import metadataView
 from manuskript.ui.collapsibleGroupBox2 import collapsibleGroupBox2
 
@@ -26,11 +26,9 @@ class outlineSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
             Outline.summarySentence: ("txtSummarySentence", QLineEdit, "grpSummary"),
             Outline.summaryFull: ("txtSummaryFull", QTextEdit, "grpSummary"),
             Outline.notes: ("txtNotes", QTextEdit, "grpNotes"),
-
-            # TODO: Tried to highlight the combo box themselves (ie. cmbPOV) but didn't succeed.
-            Outline.POV: ("lblPOV", QLabel, "grpProperties"),
-            Outline.status: ("lblStatus", QLabel, "grpProperties"),
-            Outline.label: ("lblLabel", QLabel, "grpProperties")
+            Outline.POV: ("cmbPOV", QComboBox, "grpProperties"),
+            Outline.status: ("cmbStatus", QComboBox, "grpProperties"),
+            Outline.label: ("cmbLabel", QComboBox, "grpProperties")
         }
 
         editorName, editorClass, parentName = editors[searchResult.column()]
