@@ -19,10 +19,10 @@ def test_searchMenuActions(search_menu):
     assert [action.text() for action in search_menu.actions()] == [
         search_menu.tr("Search in:"),
         '',
-        search_menu.tr("Character"),
-        search_menu.tr("FlatData"),
+        search_menu.tr("Characters"),
+        search_menu.tr("Flat data"),
         search_menu.tr("Outline"),
-        search_menu.tr("Plot"),
+        search_menu.tr("Plots"),
         search_menu.tr("World"),
         '',
         search_menu.tr("Options"),
