@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="es_ES" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.1" language="es_ES">
 <context>
     <name>Export</name>
     <message>
@@ -227,7 +228,7 @@ Use that if you get YAML related error.</source>
     </message>
     <message>
         <location filename="../manuskript/exporter/manuskript/plainText.py" line="70"/>
-        <source>Choose output file&#xe2;&#x80;&#xa6;</source>
+        <source>Choose output fileâ¦</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1126,7 +1127,7 @@ Use that if you get YAML related error.</source>
         <source>Add plot step</source>
         <translation>Añadir un paso a la trama (CTRL+Intro)</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2522"/>
         <source>&amp;Import…</source>
         <translation>&amp;Importar…</translation>
@@ -1166,7 +1167,7 @@ Use that if you get YAML related error.</source>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2570"/>
         <source>&amp;Split…</source>
         <translation>Dividir…</translation>
@@ -1489,7 +1490,7 @@ Use that if you get YAML related error.</source>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2828"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2831"/>
@@ -2690,12 +2691,12 @@ Use that if you get YAML related error.</source>
     </message>
     <message>
         <location filename="../manuskript/ui/exporters/manuskript/plainTextSettings_ui.ui" line="788"/>
-        <source>Replace ... with &#xe2;&#x80;&#xa6;</source>
+        <source>Replace ... with â¦</source>
         <translation>Reemplazar ... con ...</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/exporters/manuskript/plainTextSettings_ui.ui" line="795"/>
-        <source>Replace --- with &#xe2;&#x80;&#x94;</source>
+        <source>Replace --- with â</source>
         <translation>Reemplazar --- con —</translation>
     </message>
 </context>
@@ -2742,32 +2743,32 @@ Use that if you get YAML related error.</source>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="24"/>
         <source>Situation</source>
-        <translation type="unfinished"></translation>
+        <translation>Situación</translation>
     </message>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="25"/>
         <source>One sentence summary</source>
-        <translation type="unfinished">Resumen de una frase</translation>
+        <translation>Resumen de una frase</translation>
     </message>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="26"/>
         <source>One paragraph summary</source>
-        <translation type="unfinished">Resumen de un párrafo</translation>
+        <translation>Resumen de un párrafo</translation>
     </message>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="27"/>
         <source>One page summary</source>
-        <translation type="unfinished">Resumen de una página</translation>
+        <translation>Resumen de una página</translation>
     </message>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="28"/>
         <source>Full summary</source>
-        <translation type="unfinished">Resumen completo</translation>
+        <translation>Resumen completo</translation>
     </message>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="31"/>
         <source>Summary</source>
-        <translation type="unfinished">Resumen</translation>
+        <translation>Resumen</translation>
     </message>
 </context>
 <context>
@@ -3882,47 +3883,47 @@ Use that if you get YAML related error.</source>
     <message>
         <location filename="../manuskript/ui/search.py" line="91"/>
         <source>No results found</source>
-        <translation type="unfinished"></translation>
+        <translation>No se encontraron resultados</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="93"/>
         <source>1 result found</source>
-        <translation type="unfinished"></translation>
+        <translation>Un resultado encontrado</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="95"/>
         <source>{} results found</source>
-        <translation type="unfinished"></translation>
+        <translation>{} resultados encontrados</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="99"/>
         <source>Outline</source>
-        <translation type="unfinished">Esquema</translation>
+        <translation>Esquema</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="100"/>
         <source>Characters</source>
-        <translation type="unfinished">Personajes</translation>
+        <translation>Personajes</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="101"/>
         <source>Flat data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos Planos</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="102"/>
         <source>World</source>
-        <translation type="unfinished">Mundo</translation>
+        <translation>Mundo</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="103"/>
         <source>Plots</source>
-        <translation type="unfinished">Tramas</translation>
+        <translation>Tramas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plot steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasos</translation>
     </message>
 </context>
 <context>
@@ -3930,167 +3931,167 @@ Use that if you get YAML related error.</source>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="16"/>
         <source>Search in:</source>
-        <translation type="unfinished">Buscar en:</translation>
+        <translation>Buscar en:</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="29"/>
         <source>All</source>
-        <translation type="unfinished">Todo</translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Outline</source>
-        <translation type="unfinished">Esquema</translation>
+        <translation>Esquema</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Title</source>
-        <translation type="unfinished">Título</translation>
+        <translation>Título</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Summary sentence</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de una frase</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Full summary</source>
-        <translation type="unfinished">Resumen completo</translation>
+        <translation>Resumen completo</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Notes</source>
-        <translation type="unfinished">Notas</translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>POV</source>
-        <translation type="unfinished"></translation>
+        <translation>PDV</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>
         <source>Label</source>
-        <translation type="unfinished">Etiqueta</translation>
+        <translation>Etiqueta</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="70"/>
         <source>Characters</source>
-        <translation type="unfinished">Personajes</translation>
+        <translation>Personajes</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="79"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Motivation</source>
-        <translation type="unfinished">Motivación</translation>
+        <translation>Motivación</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Goal</source>
-        <translation type="unfinished">Objetivo</translation>
+        <translation>Objetivo</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="79"/>
         <source>Conflict</source>
-        <translation type="unfinished">Conflicto</translation>
+        <translation>Conflicto</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Epiphany</source>
-        <translation type="unfinished">Epifanía</translation>
+        <translation>Epifanía</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Sentence summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de una frase</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Paragraph summary</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Detailed info</source>
-        <translation type="unfinished">Informaciones detalladas</translation>
+        <translation>Informaciones detalladas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Flat data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos Planos</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Situation</source>
-        <translation type="unfinished"></translation>
+        <translation>Situación</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="61"/>
         <source>Page summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de una página</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="70"/>
         <source>Plots</source>
-        <translation type="unfinished">Tramas</translation>
+        <translation>Tramas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="79"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="70"/>
         <source>Result</source>
-        <translation type="unfinished">Resultado</translation>
+        <translation>Resultado</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="70"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="79"/>
         <source>World</source>
-        <translation type="unfinished">Mundo</translation>
+        <translation>Mundo</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="79"/>
         <source>Passion</source>
-        <translation type="unfinished">Pasión</translation>
+        <translation>Pasión</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="88"/>
         <source>Case sensitive</source>
-        <translation type="unfinished">Distingue mayúsculas y minúsculas</translation>
+        <translation>Distinguir mayúsculas y minúsculas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="89"/>
         <source>Match words</source>
-        <translation type="unfinished"></translation>
+        <translation>Palabras completas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="90"/>
         <source>Regex</source>
-        <translation type="unfinished"></translation>
+        <translation>Expresión Regular</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="93"/>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation>Opciones</translation>
     </message>
 </context>
 <context>
