@@ -3,7 +3,7 @@
 
 import pytest
 from manuskript.ui.searchMenu import searchMenu
-from manuskript.enums import Outline, Character, FlatData, World, SearchOption, Plot
+from manuskript.enums import Outline, Character, FlatData, World, SearchOption, Plot, SearchModel
 
 
 def triggerFilter(filter_key, actions):
@@ -37,28 +37,28 @@ def test_searchMenuDefaultColumns(search_menu):
     """
     By default all model columns are selected.
     """
-    assert set(search_menu.columns("Outline")) == {
+    assert set(search_menu.columns(SearchModel.outline)) == {
         Outline.title, Outline.text, Outline.summaryFull,
         Outline.summarySentence, Outline.notes, Outline.POV,
         Outline.status, Outline.label
     }
 
-    assert set(search_menu.columns("Character")) == {
+    assert set(search_menu.columns(SearchModel.character)) == {
         Character.name, Character.motivation, Character.goal, Character.conflict,
         Character.epiphany, Character.summarySentence, Character.summaryPara,
         Character.summaryFull, Character.infos, Character.notes
     }
 
-    assert set(search_menu.columns("FlatData")) == {
+    assert set(search_menu.columns(SearchModel.flatData)) == {
         FlatData.summarySituation, FlatData.summarySentence, FlatData.summaryPara,
         FlatData.summaryPage, FlatData.summaryFull
     }
 
-    assert set(search_menu.columns("World")) == {
+    assert set(search_menu.columns(SearchModel.world)) == {
         World.name, World.description, World.passion, World.conflict
     }
 
-    assert set(search_menu.columns("Plot")) == {
+    assert set(search_menu.columns(SearchModel.plot)) == {
         Plot.name, Plot.characters, Plot.description, Plot.result, Plot.steps
     }
 

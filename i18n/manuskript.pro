@@ -88,6 +88,8 @@ SOURCES +=  ../manuskript/ui/views/corkDelegate.py
 SOURCES +=  ../manuskript/ui/views/outlineBasics.py
 SOURCES +=  ../manuskript/ui/views/outlineDelegates.py
 SOURCES +=  ../manuskript/ui/collapsibleDockWidgets.py
+SOURCES +=  ../manuskript/ui/searchMenu.py
+SOURCES +=  ../manuskript/models/flatDataModelWrapper.py
 
 TRANSLATIONS     += manuskript_ar_SA.ts
 TRANSLATIONS     += manuskript_de.ts

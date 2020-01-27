@@ -64,15 +64,15 @@ class search(QWidget, Ui_search):
             # Set override cursor
             qApp.setOverrideCursor(Qt.WaitCursor)
 
-            for model, modelPrefix in [
-                (mainWindow().mdlOutline, "Outline"),
-                (mainWindow().mdlCharacter, "Character"),
-                (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), "FlatData"),
-                (mainWindow().mdlWorld, "World"),
-                (mainWindow().mdlPlots, "Plot")
+            for model, modelType in [
+                (mainWindow().mdlOutline, SearchModel.outline),
+                (mainWindow().mdlCharacter, SearchModel.character),
+                (flatDataModelWrapper(mainWindow().mdlFlatData, self.tr), SearchModel.flatData),
+                (mainWindow().mdlWorld, SearchModel.world),
+                (mainWindow().mdlPlots, SearchModel.plot)
             ]:
                 # Searching
-                results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelPrefix))
+                results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelType))
 
             print('results', results)
 
@@ -92,22 +92,22 @@ class search(QWidget, Ui_search):
         elif nResults == 1:
             return self.tr("1 result found")
         else:
-            return self.tr("%d results found" % nResults)
+            return self.tr("{} results found".format(nResults))
 
     def generateResultsLists(self, results):
         modelPrefixes = {
-            SearchModel.outline: "Outline",
-            SearchModel.character: "Characters",
-            SearchModel.flatData: "Flat data",
-            SearchModel.world: "World",
-            SearchModel.plot: "Plots",
-            SearchModel.plotStep: "Plot steps"
+            SearchModel.outline: self.tr("Outline"),
+            SearchModel.character: self.tr("Characters"),
+            SearchModel.flatData: self.tr("Flat data"),
+            SearchModel.world: self.tr("World"),
+            SearchModel.plot: self.tr("Plots"),
+            SearchModel.plotStep: self.tr("Plot steps")
         }
 
         for result in results:
             item = QListWidgetItem(result.title(), self.result)
             item.setData(Qt.UserRole, result)
-            item.setData(Qt.UserRole + 1, self.tr(modelPrefixes[result.type()]) + " > " + result.path())
+            item.setData(Qt.UserRole + 1, modelPrefixes[result.type()] + " > " + result.path())
             self.result.addItem(item)
 
     def openItem(self, item):

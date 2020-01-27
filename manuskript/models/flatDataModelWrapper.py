@@ -21,14 +21,14 @@ class flatDataModelWrapper(searchableModel):
 
     def column_info(self, column):
         column_data = {
-            FlatData.summarySituation: (0, self.tr("Situation"), "{}".format(self.tr("Summary"))),
-            FlatData.summarySentence: (1, self.tr("One sentence summary"), "{}".format(self.tr("Summary"))),
-            FlatData.summaryPara: (2, self.tr("One paragraph summary"), "{}".format(self.tr("Summary"))),
-            FlatData.summaryPage: (3, self.tr("One page summary"), "{}".format(self.tr("Summary"))),
-            FlatData.summaryFull: (4, self.tr("Full summary"), "{}".format(self.tr("Summary")))
+            FlatData.summarySituation: (0, self.tr("Situation")),
+            FlatData.summarySentence: (1, self.tr("One sentence summary")),
+            FlatData.summaryPara: (2, self.tr("One paragraph summary")),
+            FlatData.summaryPage: (3, self.tr("One page summary")),
+            FlatData.summaryFull: (4, self.tr("Full summary"))
         }
-        columnIndex, columnTitle, columnPath = column_data[column]
-        return self.qStandardItemModel.item(1, columnIndex).text(), columnTitle, columnPath
+        columnIndex, columnTitle = column_data[column]
+        return self.qStandardItemModel.item(1, columnIndex).text(), columnTitle, self.tr("Summary")
 
     def searchOccurrences(self, searchRegex, columns):
         results = []

@@ -12,7 +12,7 @@ class searchFiltersSubMenu(QMenu):
         self._addOptions(items, allSelected)
 
     def _addAllOption(self, title, selected):
-        action = QAction(self.tr(title), self)
+        action = QAction(title, self)
 
         action.setText(title)
         action.setCheckable(True)
@@ -31,7 +31,7 @@ class searchFiltersSubMenu(QMenu):
         for (title, columns) in items:
             if not isinstance(columns, list):
                 columns = [columns]
-            action = QAction(self.tr(title), self)
+            action = QAction(title, self)
 
             action.setCheckable(True)
             action.setChecked(allSelected)
