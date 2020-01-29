@@ -22,6 +22,15 @@ class plotStepSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
 
         lstSubPlots.setCurrentIndex(lstSubPlots.model().index(searchResult.id()[1], PlotStep.ID, lstSubPlots.rootIndex()))
 
+        # This fixes the following bug:
+        #
+        # 1. Click on a search result referencing a plot step summary.
+        # 2. Click on another plot
+        # 3. Click again on the previous search result.
+        #
+        # Without emitting the clicked signal, the plot step summary edit is not activated.
+        lstSubPlots.clicked.emit(lstSubPlots.currentIndex())
+
         if searchResult.column() == PlotStep.name:
             # For plot step names, we trigger an edition on the plot steps list. By doing this, an editor is created
             # for that plot so we can highlight it later.
