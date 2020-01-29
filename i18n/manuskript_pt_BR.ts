@@ -3914,14 +3914,9 @@ Então expanda isso para um parágrafo, depois para uma página e, em seguida, p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">Enredos</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3964,7 +3959,7 @@ Então expanda isso para um parágrafo, depois para uma página e, em seguida, p
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Notas</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>

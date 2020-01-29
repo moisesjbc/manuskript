@@ -299,18 +299,14 @@ class plotModel(QStandardItemModel):
             if isinstance(data, list):
                 for characterIndex in range(0, len(data)):
                     if len(search(searchRegex, data[characterIndex])):
-                        # TODO: Duplicated code
                         results.append(searchResult(SearchModel.plot, plotId, column,
                                                     self.item(plotIndex, Plot.name).text(),
-                                                    self.searchPath(self.item(plotIndex, Plot.name).text()),
-                                                    (characterIndex, characterIndex)))
+                                                    "", (characterIndex, characterIndex)))
             else:
                 for (startPos, endPos) in search(searchRegex, self.searchData(plotIndex, column)):
-                    # TODO: Add path.
-                    # TODO: Duplicated code.
                     results.append(
                         searchResult(SearchModel.plot, plotId, column, self.item(plotIndex, Plot.name).text(),
-                                     self.searchPath(self.item(plotIndex, Plot.name).text()), (startPos, endPos)))
+                                     "", (startPos, endPos)))
 
         return results
 
@@ -322,19 +318,12 @@ class plotModel(QStandardItemModel):
         for subplotIndex in range(len(subplots)):
             _, subplotName, subplotSummary = subplots[subplotIndex]
             for (startPos, endPos) in search(searchRegex, subplotName):
-                # TODO: Add path.
-                # TODO: Duplicated code.
                 results.append(searchResult(SearchModel.plotStep, (plotId, subplotIndex), PlotStep.name, subplotName,
-                                            self.searchPath(self.item(plotIndex, Plot.name).text(), subplotName),
-                                            (startPos, endPos)))
+                                            self.item(plotIndex, Plot.name).text(), (startPos, endPos)))
 
             for (startPos, endPos) in search(searchRegex, subplotSummary):
-                # TODO: Add path.
-                # TODO: Duplicated code.
                 results.append(searchResult(SearchModel.plotStep, (plotId, subplotIndex), PlotStep.summary,
-                                            subplotName,
-                                            self.searchPath(self.item(plotIndex, Plot.name).text(), subplotName),
-                                            (startPos, endPos)))
+                                            subplotName, self.item(plotIndex, Plot.name).text(), (startPos, endPos)))
 
         return results
 
@@ -350,11 +339,3 @@ class plotModel(QStandardItemModel):
             return characterNames
         else:
             return self.item(index, column).text()
-
-    def searchPath(self, plotName, plotStepName = None):
-        path = plotName
-
-        if plotStepName is not None:
-            path += " > " + plotStepName
-
-        return path

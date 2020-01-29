@@ -3916,14 +3916,9 @@ Usalo se ottieni un errore relativo a YAML.</translation>
         <translation type="unfinished">Ambientazione</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">Trame</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

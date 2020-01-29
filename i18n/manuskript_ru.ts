@@ -2768,7 +2768,7 @@ Use that if you get YAML related error.</source>
     <message>
         <location filename="../manuskript/models/flatDataModelWrapper.py" line="31"/>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сводка</translation>
     </message>
 </context>
 <context>
@@ -3916,14 +3916,9 @@ Use that if you get YAML related error.</source>
         <translation type="unfinished">Мир</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">Сюжеты</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

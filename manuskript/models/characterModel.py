@@ -309,9 +309,6 @@ class Character(searchableItem):
     def searchTitle(self):
         return self.name()
 
-    def searchPath(self):
-        return self.name()
-
     def searchData(self, column):
         if column == C.infos:
             return self.infos

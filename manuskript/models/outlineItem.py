@@ -511,7 +511,7 @@ class outlineItem(abstractItem, searchableModel, searchableItem):
         return self.title()
 
     def searchPath(self):
-        return self.path()
+        return ' > '.join(self.path().split(' > ')[:-1])
 
     def searchableItems(self):
         return self.children()

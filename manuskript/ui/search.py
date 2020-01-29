@@ -95,19 +95,23 @@ class search(QWidget, Ui_search):
             return self.tr("{} results found".format(nResults))
 
     def generateResultsLists(self, results):
-        modelPrefixes = {
+        modelPathPrefixes = {
             SearchModel.outline: self.tr("Outline"),
             SearchModel.character: self.tr("Characters"),
             SearchModel.flatData: self.tr("Flat data"),
             SearchModel.world: self.tr("World"),
             SearchModel.plot: self.tr("Plots"),
-            SearchModel.plotStep: self.tr("Plot steps")
+            SearchModel.plotStep: self.tr("Plots")
         }
 
         for result in results:
+            path = modelPathPrefixes[result.type()]
+            if len(result.path()) > 0:
+                path += " > " + result.path()
+
             item = QListWidgetItem(result.title(), self.result)
             item.setData(Qt.UserRole, result)
-            item.setData(Qt.UserRole + 1, modelPrefixes[result.type()] + " > " + result.path())
+            item.setData(Qt.UserRole + 1,  path)
             self.result.addItem(item)
 
     def openItem(self, item):

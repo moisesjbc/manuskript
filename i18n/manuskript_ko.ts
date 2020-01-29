@@ -3911,14 +3911,9 @@ YAML에 문제가 있을 때 사용하십시오.</translation>
         <translation type="unfinished">세계</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">플롯</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

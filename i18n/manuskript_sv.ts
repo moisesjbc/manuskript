@@ -3914,14 +3914,9 @@ Använd detta om du får ett felmeddelande angående YAML.</translation>
         <translation type="unfinished">Värld</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">Handlingar</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

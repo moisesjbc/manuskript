@@ -3892,14 +3892,9 @@ YAML関連のエラーが発生した場合は、このオプションを有効�
         <translation type="unfinished">世界</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
+        <location filename="../manuskript/ui/search.py" line="104"/>
         <source>Plots</source>
         <translation type="unfinished">プロット</translation>
-    </message>
-    <message>
-        <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3942,7 +3937,7 @@ YAML関連のエラーが発生した場合は、このオプションを有効�
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="47"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">備考</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/searchMenu.py" line="35"/>

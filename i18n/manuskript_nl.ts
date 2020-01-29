@@ -3897,13 +3897,8 @@ Gebruik dit bij een YAML gerelateerde foutmelding.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
-        <source>Plots</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
+        <source>Plots</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

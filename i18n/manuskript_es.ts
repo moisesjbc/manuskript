@@ -1129,8 +1129,8 @@ Use that if you get YAML related error.</source>
     </message>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2522"/>
-        <source>&amp;Import…</source>
-        <translation>&amp;Importar…</translation>
+        <source>&amp;Importâ¦</source>
+        <translation type="unfinished">&amp;Importar…</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2525"/>
@@ -1169,8 +1169,8 @@ Use that if you get YAML related error.</source>
     </message>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2570"/>
-        <source>&amp;Split…</source>
-        <translation>Dividir…</translation>
+        <source>&amp;Splitâ¦</source>
+        <translation type="unfinished">Dividir…</translation>
     </message>
     <message>
         <location filename="../manuskript/ui/mainWindow.ui" line="2573"/>
@@ -3916,13 +3916,8 @@ Use that if you get YAML related error.</source>
         <translation>Mundo</translation>
     </message>
     <message>
-        <location filename="../manuskript/ui/search.py" line="103"/>
-        <source>Plots</source>
-        <translation>Tramas</translation>
-    </message>
-    <message>
         <location filename="../manuskript/ui/search.py" line="104"/>
-        <source>Plot steps</source>
+        <source>Plots</source>
         <translation>Pasos</translation>
     </message>
 </context>
