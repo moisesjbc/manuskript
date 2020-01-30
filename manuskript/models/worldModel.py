@@ -122,7 +122,7 @@ class worldModel(QStandardItemModel, searchableModel):
         while item.parent():
             item = item.parent()
             path.append(item.text())
-        path = " > ".join(path)
+        path = " > ".join(reversed(path))
         return path
 
     ###############################################################################

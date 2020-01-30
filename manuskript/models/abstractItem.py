@@ -155,7 +155,7 @@ class abstractItem():
 
     def path(self, sep=" > "):
         "Returns path to item as string."
-        if self.parent().parent():
+        if self.parent() and self.parent().parent():
             return "{parent}{sep}{title}".format(
                 parent=self.parent().path(),
                 sep=sep,

@@ -30,7 +30,6 @@ def test_filtersSubmenuTitle(filtersSubmenuAllSelected):
 
 def test_filtersSubmenuMenuContainsGivenItems(filtersSubmenuAllSelected):
     actions = filtersSubmenuAllSelected.filterActions()
-    print([action.text() for action in actions])
     assert len(actions) == len(MENU_ELEMENTS)
     for i in range(0, len(MENU_ELEMENTS)):
         assert actions[i].text() == filtersSubmenuAllSelected.tr(MENU_ELEMENTS[i][0])

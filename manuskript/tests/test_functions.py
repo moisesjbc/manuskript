@@ -97,22 +97,22 @@ def test_mainWindow():
     assert len(F.findWidgetsOfClass(QLCDNumber)) == 0
 
 
-def test_search_no_match():
+def test_searchNoMmatch():
     assert F.search(re.compile("text"), "foo") == []
 
 
-def test_search_simple_str_match():
+def test_searchSimpleStrMatch():
     assert F.search(re.compile("text"), "This is some text") == [(13, 17)]
 
 
-def test_search_multiple_str_matches():
+def test_searchMultipleStrMatches():
     assert F.search(re.compile("text"), "text, text and more text") == [
         (0, 4),
         (6, 10),
         (20, 24)
     ]
 
-def test_search_multiple_str_matches_case_sensitive():
+def test_searchMultipleStrMatchesCaseSensitive():
     assert F.search(re.compile("text"), "TeXt, TEXT and more text") == [(20, 24)]
 
     assert F.search(re.compile("text", re.IGNORECASE), "TeXt, TEXT and more text") == [

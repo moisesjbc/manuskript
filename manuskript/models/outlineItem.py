@@ -519,8 +519,8 @@ class outlineItem(abstractItem, searchableModel, searchableItem):
     def searchOccurrences(self, searchRegex, columns):
         results = []
 
+        # Don't search on root node.
         if self.parent():
-            # Don't search on root node.
             results += searchableItem.searchOccurrences(self, searchRegex, columns)
 
         results += searchableModel.searchOccurrences(self, searchRegex, columns)

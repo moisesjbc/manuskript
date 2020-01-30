@@ -4,6 +4,9 @@
 """Tests for outlineItem"""
 
 import pytest
+from manuskript.enums import Outline
+from manuskript.functions import mainWindow
+from manuskript.models.characterModel import Character, characterModel
 
 
 @pytest.fixture
@@ -135,6 +138,7 @@ def test_modelStuff(outlineModelBasic):
     assert text1.ID() is not None
     assert folder.childCountRecursive() == 2
     assert text1.path() == "Folder > Text"
+    assert text1.searchPath() == "Folder"
     assert len(text1.pathID()) == 2
 
     # IDs
@@ -146,3 +150,36 @@ def test_modelStuff(outlineModelBasic):
     assert text3.ID() == "0"
     root.checkIDs()
     assert text3.ID() != "0"
+
+
+def test_searchTitle(outlineItemText):
+    assert outlineItemText.searchTitle() == "Text"
+
+
+def test_searchPath(outlineItemText):
+    assert outlineItemText.searchPath() == ""
+
+
+def test_searchData(outlineItemText):
+    assert outlineItemText.searchData(Outline.title) == "Text"
+    assert outlineItemText.searchData(Outline.summarySentence) == ""
+
+    outlineItemText.setData(Outline.summaryFull, "Summary full")
+    assert outlineItemText.searchData(Outline.summaryFull) == "Summary full"
+
+    outlineItemText.setData(Outline.text, "Outline text")
+    assert outlineItemText.searchData(Outline.text) == "Outline text"
+
+
+def test_searchDataCharacterFound(outlineItemText):
+    CHARACTER_ID = 13
+    outlineItemText.setData(Outline.POV, CHARACTER_ID)
+    mainWindow().mdlCharacter.getCharacterByID = lambda id: Character(characterModel(None), "character_" + str(id))
+    assert outlineItemText.searchData(Outline.POV) == "character_13"
+
+
+def test_searchDataCharacterNotFound(outlineItemText):
+    CHARACTER_ID = 13
+    outlineItemText.setData(Outline.POV, CHARACTER_ID)
+    mainWindow().mdlCharacter.getCharacterByID = lambda _: None
+    assert outlineItemText.searchData(Outline.POV) is None

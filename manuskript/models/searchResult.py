@@ -35,6 +35,7 @@ class searchResult():
     def __eq__(self, other):
         return self.type() == other.type() and \
                self.id() == other.id() and \
-               self.column == other.column and \
-               self.startPos == other.startPos and \
-               self.endPos == other.endPos
+               self.column() == other.column() and \
+               self.title() == other.title() and \
+               self.path() == other.path() and \
+               self.pos() == other.pos()
