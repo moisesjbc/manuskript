@@ -72,7 +72,9 @@ class search(QWidget, Ui_search):
                 (mainWindow().mdlPlots, SearchModel.plot)
             ]:
                 # Searching
-                results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelType))
+                columns = self.searchMenu.columns(modelType)
+                if len(columns) > 0:
+                    results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelType))
 
             print('results', results)
 
