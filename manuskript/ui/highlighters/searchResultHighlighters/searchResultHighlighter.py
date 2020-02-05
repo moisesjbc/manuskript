@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # --!-- coding: utf8 --!--
 
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSearchResultHighlighter import abstractSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.baseSearchResultHighlighter import baseSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.characterSearchResultHighlighter import characterSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.flatDataSearchResultHighlighter import flatDataSearchResultHighlighter
 from manuskript.ui.highlighters.searchResultHighlighters.outlineSearchResultHighlighter import outlineSearchResultHighlighter
@@ -11,11 +11,20 @@ from manuskript.ui.highlighters.searchResultHighlighters.plotStepSearchResultHig
 from manuskript.enums import SearchModel
 
 
-class searchResultHighlighter(abstractSearchResultHighlighter):
+class searchResultHighlighter(baseSearchResultHighlighter):
+    """
+    Highlighter for search results
+    """
     def __init__(self):
         super().__init__()
 
     def highlightSearchResult(self, searchResult):
+        """
+        Highlights the given search result
+
+        Internally holds a map associated every searchable model to its proper highlighter. This is used for delegating
+        the processing to the right highlighter.
+        """
         highlighters = {
             SearchModel.outline: outlineSearchResultHighlighter,
             SearchModel.character: characterSearchResultHighlighter,

@@ -3,20 +3,33 @@
 
 from manuskript.models import references as Ref
 from manuskript.enums import PlotStep
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSpecificSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.modelSearchResultHighlighter import modelSearchResultHighlighter
 from manuskript.functions import mainWindow
 from PyQt5.QtWidgets import QTextEdit, QLineEdit, QTableView
 
 
-class plotStepSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
+class plotStepSearchResultHighlighter(modelSearchResultHighlighter):
+    """
+    Highlighter for search results on plot step items
+    """
     def __init__(self):
         super().__init__()
 
     def openView(self, searchResult):
+        """
+        Open the plot step view containing the given search result
+        """
         r = Ref.plotReference(searchResult.id()[0])
         Ref.open(r)
 
     def retrieveWidget(self, searchResult):
+        """
+        Retrieves the widget containing the given search result.
+
+        Internally uses a map associating every searchable column to a tuple (widgetName, widgetType) where:
+
+            - widgetName and widgetType:    name and type of the widget containing the searched column.
+        """
         mainWindow().tabPlot.setCurrentIndex(1)
         lstSubPlots = mainWindow().tabPlot.findChild(QTableView, "lstSubPlots")
 

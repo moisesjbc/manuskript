@@ -2,10 +2,10 @@
 # --!-- coding: utf8 --!--
 
 
-from manuskript.ui.highlighters.searchResultHighlighters.abstractSpecificSearchResultHighlighter import abstractSpecificSearchResultHighlighter
+from manuskript.ui.highlighters.searchResultHighlighters.modelSearchResultHighlighter import modelSearchResultHighlighter
 
 
-class tabsSearchResultHighlighter(abstractSpecificSearchResultHighlighter):
+class tabsSearchResultHighlighter(modelSearchResultHighlighter):
     """
     Base class for Character and World highlighters: the ones highlighting widgets inside a QTabWidget.
     """

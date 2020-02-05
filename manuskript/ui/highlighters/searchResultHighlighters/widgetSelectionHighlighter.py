@@ -14,6 +14,14 @@ class widgetSelectionHighlighter():
         pass
 
     def highlightWidgetSelection(self, widget, startPos, endPos):
+        """
+        Main method. Delegates the call to the right highlighting method according to the widget type.
+
+        :param widget:      widget containing the result to be highlighter
+        :param startPos:    starting position of the search result on the widget. Can be a cursor position, a row, etc
+                            depending on the widget type.
+        :param endPos:      ending position of the search result on the widget.
+        """
         if isinstance(widget, QTextEdit) or isinstance(widget, QPlainTextEdit):
             self._highlightTextEditSearchResult(widget, startPos, endPos)
         elif isinstance(widget, QLineEdit):

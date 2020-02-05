@@ -10,15 +10,29 @@ from manuskript.ui.highlighters.searchResultHighlighters.tabsSearchResultHighlig
 
 
 class characterSearchResultHighlighter(tabsSearchResultHighlighter):
+    """
+    Highlighter for search results on characters
+    """
     def __init__(self):
         super().__init__(mainWindow().tabPersos)
 
     def openView(self, searchResult):
+        """
+        Open the character view containing the given search result
+        """
         r = Ref.characterReference(searchResult.id())
         Ref.open(r)
         mainWindow().tabPersos.setEnabled(True)
 
     def widgetsMap(self):
+        """
+        Returns a map associating every character searchable column to the widget containing that column.
+
+        Result is a tuple (tabIndex, widgetName, widgetType) where:
+
+            - tabIndex:                     index of the Character's tab containing the searched column.
+            - widgetName and widgetType:    name and type of the widget containing the searched column.
+        """
         return {
             Character.name: (0, "txtPersoName", QLineEdit),
             Character.goal: (0, "txtPersoGoal", QTextEdit),
