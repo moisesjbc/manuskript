@@ -2,17 +2,14 @@
 # --!-- coding: utf8 --!--
 
 from PyQt5.QtGui import QTextCursor
-from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QLabel, QListView, QComboBox
+from PyQt5.QtWidgets import QTextEdit, QTableView, QLineEdit, QPlainTextEdit, QListView, QComboBox
 from PyQt5.QtCore import QItemSelectionModel
 
 
 class widgetSelectionHighlighter():
     """
-    Utility class for highlighting a search result on a widget.
+    Utility class for highlighting a selection on a widget.
     """
-    def __init__(self):
-        pass
-
     def highlightWidgetSelection(self, widget, startPos, endPos):
         """
         Main method. Delegates the call to the right highlighting method according to the widget type.
@@ -30,8 +27,6 @@ class widgetSelectionHighlighter():
             self._highlightTableViewSearchResult(widget, startPos)
         elif isinstance(widget, QListView):
             self._highlightListSearchResult(widget, startPos)
-        elif isinstance(widget, QLabel):
-            self._highlightLabelSearchResult(widget)
         elif isinstance(widget, QComboBox):
             self._highlightComboBoxSearchResult(widget)
         else:
@@ -92,19 +87,10 @@ class widgetSelectionHighlighter():
             list_view.setCurrentIndex(index)
             list_view.selectionModel().select(index, QItemSelectionModel.Select)
 
-    def _highlightLabelSearchResult(self, label):
-        # On focus out, clear label selection.
-        # FIXME: This would overwrite all styles!
-        old_style = label.styleSheet()
-        self.generateClearHandler(label, lambda widget: widget.setStyleSheet(old_style))
-
-        # Highlight search result on label.
-        label.setStyleSheet("background-color: steelblue")
-
     def _highlightComboBoxSearchResult(self, comboBox):
         # On focus out, clear combo box highlighting.
         old_style = comboBox.styleSheet()
         self.generateClearHandler(comboBox, lambda widget: widget.setStyleSheet(old_style))
 
         # Highlight combo box.
-        comboBox.setStyleSheet("background-color: steelblue")
+        comboBox.setStyleSheet(old_style + " background-color: steelblue;")
