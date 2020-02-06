@@ -94,7 +94,7 @@ class search(QWidget, Ui_search):
         elif nResults == 1:
             return self.tr("1 result found")
         else:
-            return self.tr("{} results found".format(nResults))
+            return self.tr("{} results found").format(nResults)
 
     def generateResultsLists(self, results):
         modelPathPrefixes = {
