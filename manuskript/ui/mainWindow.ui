@@ -2281,7 +2281,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="search" name="widget" native="true">
+      <widget class="search" name="search" native="true">
        <property name="font">
         <font>
          <weight>50</weight>

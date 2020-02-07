@@ -815,6 +815,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if settings.autoSaveNoChanges:
             self.saveTimerNoChanges.start()
 
+        # Side effect: repeat global search (if any)
+        self.search.onDataChanged()
+
     def saveDatas(self, projectName=None):
         """Saves the current project (in self.currentProject).
 

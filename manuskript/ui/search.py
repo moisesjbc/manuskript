@@ -88,6 +88,10 @@ class search(QWidget, Ui_search):
         else:
             self.lblResultsCounter.setText(self.generateResultsCountText(0))
 
+    def onDataChanged(self):
+        if len(self.searchTextInput.text()):
+            self.search()
+
     def generateResultsCountText(self, nResults):
         if nResults == 0:
             return self.tr("No results found")
