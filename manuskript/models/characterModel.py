@@ -320,14 +320,15 @@ class Character(searchableItem):
 
         for column in columns:
             data = self.searchData(column)
-            if isinstance(data, list):
+            if column == C.infos:
+                # For infos column, data is a list of objects with description and value.
                 for i in range(0, len(data)):
                     if len(search(searchRegex, data[i].description)):
                         results.append(self.wrapSearchOccurrence(column, i, 0))
                     if len(search(searchRegex, data[i].value)):
                         results.append(self.wrapSearchOccurrence(column, i, 1))
-
             else:
+                # For all other columns data is a string.
                 results += super().searchOccurrences(searchRegex, [column])
 
         return results

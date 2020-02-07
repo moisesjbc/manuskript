@@ -485,7 +485,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def doSearch(self):
         "Do a global search."
         self.dckSearch.show()
-        search_text_input = self.findChild(QLineEdit, 'searchTextInput')
+        search_text_input = self.search.searchTextInput
         search_text_input.setFocus()
         search_text_input.selectAll()
     def documentsRename(self):

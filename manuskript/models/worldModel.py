@@ -122,7 +122,7 @@ class worldModel(QStandardItemModel, searchableModel):
         while item.parent():
             item = item.parent()
             path.append(item.text())
-        path = " > ".join(reversed(path))
+        path = " > ".join(path)
         return path
 
     ###############################################################################
@@ -373,7 +373,7 @@ class worldModel(QStandardItemModel, searchableModel):
         def _searchOccurrences(item):
             name = item.text()
             ID = self.itemID(item)
-            path = self.path(item)
+            path = self.searchPath(item)
 
             for column in columns:
                 for (startPos, endPos) in search(searchRegex, self.searchData(item, column)):
@@ -405,3 +405,12 @@ class worldModel(QStandardItemModel, searchableModel):
             return self.passion(index)
         else:
             raise NotImplementedError
+
+    def searchPath(self, item):
+        """Returns the path to the item in the form of 'ancestor > ... > grand-parent > parent'."""
+        path = []
+        while item.parent():
+            item = item.parent()
+            path.append(item.text())
+        path = " > ".join(reversed(path))
+        return path

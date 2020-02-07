@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manuskript/ui/mainWindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -378,7 +378,7 @@ class Ui_MainWindow(object):
         self.scrollAreaPersoInfos.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.scrollAreaPersoInfos.setObjectName("scrollAreaPersoInfos")
         self.scrollAreaPersoInfosWidget = QtWidgets.QWidget()
-        self.scrollAreaPersoInfosWidget.setGeometry(QtCore.QRect(0, 0, 450, 703))
+        self.scrollAreaPersoInfosWidget.setGeometry(QtCore.QRect(0, 0, 204, 606))
         self.scrollAreaPersoInfosWidget.setObjectName("scrollAreaPersoInfosWidget")
         self.formLayout_8 = QtWidgets.QFormLayout(self.scrollAreaPersoInfosWidget)
         self.formLayout_8.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
@@ -1030,7 +1030,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.stack)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1112, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1112, 30))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -1345,10 +1345,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stack.setCurrentIndex(1)
-        self.tabMain.setCurrentIndex(3)
+        self.tabMain.setCurrentIndex(0)
         self.tabSummary.setCurrentIndex(0)
         self.tabPersos.setCurrentIndex(0)
-        self.tabPlot.setCurrentIndex(1)
+        self.tabPlot.setCurrentIndex(0)
         self.comboBox_2.setCurrentIndex(0)
         self.stkPlotSummary.setCurrentIndex(0)
         self.tabWorld.setCurrentIndex(0)

@@ -76,8 +76,6 @@ class search(QWidget, Ui_search):
                 if len(columns) > 0:
                     results += model.searchOccurrences(searchRegex, self.searchMenu.columns(modelType))
 
-            print('results', results)
-
             self.lblResultsCounter.setText(self.generateResultsCountText(len(results)))
 
             # Showing results

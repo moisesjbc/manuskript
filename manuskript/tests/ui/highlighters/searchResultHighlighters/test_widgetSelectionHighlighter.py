@@ -26,7 +26,7 @@ def test_highligtTableView():
     tableView.setItem(1, 0, QTableWidgetItem("1, 0"))
     tableView.setItem(1, 1, QTableWidgetItem("1, 1"))
 
-    # End pos is ignored. All row at startPos is selected.
+    # End pos is ignored. Full row at startPos is selected.
     widgetSelectionHighlighter().highlightWidgetSelection(tableView, 1, 9999)
 
     selectedItems = tableView.selectedItems()
